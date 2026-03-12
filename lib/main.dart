@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/theme/app_theme.dart';
 import 'core/services/backup_service.dart';
 import 'features/main/presentation/screens/main_navigation_screen.dart';
 import 'features/practice/presentation/screens/word_selection_screen.dart';
+import 'features/splash/presentation/screens/splash_screen.dart';
 
 import 'features/practice/presentation/screens/spelling_practice_screen.dart';
 import 'features/statistics/presentation/screens/statistics_screen.dart';
@@ -14,11 +16,15 @@ import 'core/database/database_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHelper().database;
-  runApp(const MyApp());
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenSplash = prefs.getBool('seen_splash') ?? false;
+  runApp(MyApp(showSplash: !hasSeenSplash));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool showSplash;
+
+  const MyApp({super.key, required this.showSplash});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -79,8 +85,9 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: _navigatorKey,
       title: 'WordCard Coach',
       theme: AppTheme.lightTheme,
-      initialRoute: '/',
+      initialRoute: widget.showSplash ? SplashScreen.routeName : '/',
       routes: {
+        SplashScreen.routeName: (context) => const SplashScreen(),
         '/': (context) => const MainNavigationScreen(),
         '/practice/selection': (context) => const WordSelectionScreen(),
 
