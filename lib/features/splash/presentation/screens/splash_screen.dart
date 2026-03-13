@@ -118,23 +118,24 @@ class _SplashScreenState extends State<SplashScreen>
                             const SizedBox(height: 28),
                             _buildBranding(isCompact: isCompact)
                                 .animate()
-                                .fadeIn(duration: 500.ms, delay: 100.ms)
+                                .fadeIn(duration: 400.ms, delay: 200.ms)
                                 .slideY(
-                                  begin: 0.2,
+                                  begin: 0.1,
                                   end: 0,
-                                  curve: Curves.easeOutQuad,
+                                  curve: Curves.easeOutBack,
                                 ),
                             const Spacer(flex: 1),
                             Text(
-                              '\u8f7b\u89e6\u8fdb\u5165',
+                              '轻触进入',
                               style: GoogleFonts.notoSans(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.textMediumEmphasis,
+                                letterSpacing: 1.2,
                               ),
-                            ),
+                            ).animate().fadeIn(duration: 600.ms, delay: 600.ms),
                             const SizedBox(height: 8),
-                            _buildLoadingDots(),
+                            _buildLoadingDots().animate().fadeIn(duration: 600.ms, delay: 700.ms),
                             const SizedBox(height: 24),
                           ],
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -354,7 +355,11 @@ class _WordSelectionViewState extends State<WordSelectionView> {
                           compactSingleColumn: useSingleColumn,
                           roomyLayout: roomyLayout,
                           scale: scale,
-                        );
+                        )
+                        .animate()
+                        .fadeIn(duration: 400.ms, delay: (index * 80).ms)
+                        .scale(begin: const Offset(0.8, 0.8), curve: Curves.easeOutBack)
+                        .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack);
                       },
                     );
                   },
@@ -567,7 +572,8 @@ class _WordSelectionViewState extends State<WordSelectionView> {
             },
           ),
         ),
-      ),
+      ).animate(target: isSelected && optionWord.id == widget.word.id ? 1 : 0)
+       .scale(begin: const Offset(1, 1), end: const Offset(1.08, 1.08), curve: Curves.elasticOut, duration: 500.ms),
     );
   }
 }

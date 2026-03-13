@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/database/models/word.dart';
@@ -91,7 +92,10 @@ class _WordLearningCardState extends State<WordLearningCard> {
                               compact: true,
                               scale: wideScale,
                               fillHeight: true,
-                            ),
+                            )
+                            .animate()
+                            .fadeIn(duration: 400.ms)
+                            .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
                           ),
                         ),
                       ),
@@ -108,10 +112,16 @@ class _WordLearningCardState extends State<WordLearningCard> {
                                     compact: true,
                                     scrollableBody: true,
                                     scale: wideScale,
-                                  ),
+                                  )
+                                  .animate()
+                                  .fadeIn(duration: 400.ms, delay: 100.ms)
+                                  .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
                                 ),
                                 const SizedBox(height: 14),
-                                _buildNextButton(scale: wideScale),
+                                _buildNextButton(scale: wideScale)
+                                    .animate()
+                                    .fadeIn(duration: 400.ms, delay: 200.ms)
+                                    .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack),
                               ],
                             ),
                           ),
@@ -133,9 +143,15 @@ class _WordLearningCardState extends State<WordLearningCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _buildWordInfoCard(),
+                      _buildWordInfoCard()
+                          .animate()
+                          .fadeIn(duration: 400.ms)
+                          .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
                       const SizedBox(height: 16),
-                      _buildExampleCard(),
+                      _buildExampleCard()
+                          .animate()
+                          .fadeIn(duration: 400.ms, delay: 100.ms)
+                          .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
                     ],
                   ),
                 ),
@@ -144,7 +160,10 @@ class _WordLearningCardState extends State<WordLearningCard> {
                 top: false,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(24, 8, 24, 20),
-                  child: _buildNextButton(),
+                  child: _buildNextButton()
+                      .animate()
+                      .fadeIn(duration: 400.ms, delay: 200.ms)
+                      .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack),
                 ),
               ),
             ],

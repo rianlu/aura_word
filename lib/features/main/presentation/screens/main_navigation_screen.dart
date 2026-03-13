@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../features/home/presentation/screens/home_dashboard_screen.dart';
 import '../../../../features/dictionary/presentation/screens/dictionary_screen.dart';
@@ -134,13 +135,16 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                     icon: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeOutBack,
-                      transform: Matrix4.identity()
-                        ..scale(isSelected ? 1.2 : 1.0),
+                      transform: isSelected
+                          ? (Matrix4.identity()
+                            ..translate(0.0, -4.0) // 向上漂浮 4 像素
+                            ..scale(1.15))
+                          : Matrix4.identity(),
                       child: Icon(item.icon)
                         .animate(target: isSelected ? 1 : 0)
                         .scale(
                           begin: const Offset(1, 1),
-                          end: const Offset(1.15, 1.15),
+                          end: const Offset(1.1, 1.1),
                           curve: Curves.elasticOut,
                           duration: 500.ms,
                         ),

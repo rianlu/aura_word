@@ -101,26 +101,41 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         children: [
           // 逻辑处理
           if (_masteryDistribution != null)
-             MasteryPieChart(distribution: _masteryDistribution!)
+             MasteryPieChart(
+               key: ValueKey('pie_${_masteryDistribution!.hashCode}'),
+               distribution: _masteryDistribution!
+             )
                 .animate()
-                .fadeIn(duration: 500.ms)
-                .scale(delay: 100.ms),
+                .fadeIn(duration: 600.ms)
+                .scale(
+                  begin: const Offset(0.7, 0.7), 
+                  curve: Curves.elasticOut, 
+                  duration: 1000.ms
+                )
+                .rotate(begin: -0.1, end: 0, curve: Curves.easeOutBack),
           
           const SizedBox(height: 20),
           
           // 逻辑处理
-          WeeklyBarChart(weeklyActivity: _monthlyActivity)
+          WeeklyBarChart(
+            key: ValueKey('bar_${_monthlyActivity.length}'),
+            weeklyActivity: _monthlyActivity
+          )
               .animate()
               .fadeIn(duration: 500.ms, delay: 200.ms)
-              .slideX(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+              .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
           
           const SizedBox(height: 20),
           
           // 逻辑处理
-          StudyHeatMap(activity: _monthlyActivity)
+          StudyHeatMap(
+            key: ValueKey('heatmap_${_monthlyActivity.length}'),
+            activity: _monthlyActivity
+          )
               .animate()
               .fadeIn(duration: 500.ms, delay: 400.ms)
-              .slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+              .scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutBack)
+              .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
           
           const SizedBox(height: 40),
         ],
@@ -140,10 +155,18 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             child: Column(
               children: [
                 if (_masteryDistribution != null)
-                   MasteryPieChart(distribution: _masteryDistribution!)
+                   MasteryPieChart(
+                     key: ValueKey('pie_tab_${_masteryDistribution!.hashCode}'),
+                     distribution: _masteryDistribution!
+                   )
                       .animate()
-                      .fadeIn(duration: 500.ms)
-                      .scale(delay: 100.ms),
+                      .fadeIn(duration: 600.ms)
+                      .scale(
+                        begin: const Offset(0.7, 0.7), 
+                        curve: Curves.elasticOut, 
+                        duration: 1000.ms
+                      )
+                      .rotate(begin: -0.1, end: 0, curve: Curves.easeOutBack),
               ],
             ),
           ),
@@ -155,17 +178,24 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
             flex: 6,
             child: Column(
               children: [
-                WeeklyBarChart(weeklyActivity: _monthlyActivity)
+                WeeklyBarChart(
+                  key: ValueKey('bar_tab_${_monthlyActivity.length}'),
+                  weeklyActivity: _monthlyActivity
+                )
                     .animate()
                     .fadeIn(duration: 500.ms, delay: 200.ms)
-                    .slideX(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                 
                 const SizedBox(height: 24),
                 
-                StudyHeatMap(activity: _monthlyActivity)
+                StudyHeatMap(
+                  key: ValueKey('heatmap_tab_${_monthlyActivity.length}'),
+                  activity: _monthlyActivity
+                )
                     .animate()
                     .fadeIn(duration: 500.ms, delay: 400.ms)
-                    .slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+                    .scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutBack)
+                    .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
                 
                 const SizedBox(height: 40),
               ],

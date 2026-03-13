@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/database/daos/word_dao.dart';
 import '../../../../core/database/daos/user_stats_dao.dart';
@@ -228,20 +229,23 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.emoji_events_rounded, size: 48, color: Color(0xFF22C55E)), // 绿色 500
-                  ),
+                  )
+                  .animate()
+                  .scale(duration: 800.ms, curve: Curves.elasticOut)
+                  .fadeIn(),
                   const SizedBox(height: 20),
                   
                   Text(
                     "任务完成!", 
                     textAlign: TextAlign.center,
                     style: GoogleFonts.plusJakartaSans(fontSize: 22, fontWeight: FontWeight.w800, color: AppColors.textHighEmphasis)
-                  ),
+                  ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                   const SizedBox(height: 8),
                   Text(
                     "太棒了！你完成了今天的学习任务。",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.plusJakartaSans(fontSize: 14, color: AppColors.textMediumEmphasis, height: 1.4)
-                  ),
+                  ).animate().fadeIn(delay: 300.ms),
 
                   const SizedBox(height: 24),
 
@@ -264,7 +268,7 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
                             ],
                           ),
                         ),
-                      ),
+                      ).animate().fadeIn(delay: 450.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Container(
@@ -282,7 +286,7 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
                             ],
                           ),
                         ),
-                      ),
+                      ).animate().fadeIn(delay: 550.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                     ],
                   ),
 
@@ -401,24 +405,47 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
                     children: [
                       Text(
                         "下一项: ${_getPhaseTitle(_pendingNextPhase!)}",
-                        style: GoogleFonts.plusJakartaSans(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textMediumEmphasis)
-                      ),
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 24, 
+                          fontWeight: FontWeight.bold, 
+                          color: AppColors.textMediumEmphasis
+                        )
+                      ).animate().fadeIn().slideY(begin: -0.2, end: 0, curve: Curves.easeOutBack),
                       const SizedBox(height: 32),
                       Container(
-                        width: 120, height: 120,
+                        width: 140, height: 140,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: AppColors.primary,
-                          boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.4), blurRadius: 40, offset: const Offset(0, 10))]
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(alpha: 0.4), 
+                              blurRadius: 40, 
+                              offset: const Offset(0, 10)
+                            )
+                          ]
                         ),
                         child: Text(
                           "$_transitionCountdown",
-                          style: GoogleFonts.plusJakartaSans(fontSize: 64, fontWeight: FontWeight.w900, color: Colors.white),
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 72, 
+                            fontWeight: FontWeight.w900, 
+                            color: Colors.white
+                          ),
                         ),
-                      ),
+                      )
+                      .animate(key: ValueKey(_transitionCountdown))
+                      .scale(begin: const Offset(0.8, 0.8), duration: 400.ms, curve: Curves.elasticOut)
+                      .shimmer(delay: 200.ms, duration: 800.ms),
                       const SizedBox(height: 32),
-                      Text("准备开始!", style: GoogleFonts.plusJakartaSans(fontSize: 18, color: AppColors.textMediumEmphasis)),
+                      Text(
+                        "准备开始!", 
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 18, 
+                          color: AppColors.textMediumEmphasis
+                        )
+                      ).animate().fadeIn(delay: 400.ms),
                     ],
                   ),
                 ),

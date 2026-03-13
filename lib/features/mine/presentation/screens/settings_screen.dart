@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -41,7 +42,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
-            _buildSectionHeader('数据管理'),
+            _buildSectionHeader('数据管理')
+                .animate()
+                .fadeIn(duration: 400.ms)
+                .slideX(begin: -0.1, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 12),
             _buildBubblyMenuItem(
               icon: Icons.upload_file_rounded,
@@ -51,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () async {
                 await BackupService().exportData(context);
               },
-            ),
+            ).animate().fadeIn(delay: 100.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 16),
             _buildBubblyMenuItem(
               icon: Icons.download_rounded,
@@ -61,10 +65,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () async {
                 await BackupService().importData(context);
               },
-            ),
+            ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
 
             const SizedBox(height: 32),
-            _buildSectionHeader('词库管理'),
+            _buildSectionHeader('词库管理')
+                .animate()
+                .fadeIn(delay: 300.ms)
+                .slideX(begin: -0.1, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 12),
             _buildBubblyMenuItem(
               icon: Icons.cloud_sync_rounded,
@@ -72,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: '更新本地词库',
               subtitle: '保留学习进度，仅更新释义和例句',
               onTap: _handleUpdateLibrary,
-            ),
+            ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
           ],
         ),
       ),
@@ -192,7 +199,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: AppColors.primary,
                     size: 36,
                   ),
-                ),
+                ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
                 const SizedBox(height: 20),
                 Text(
                   '更新词库',
@@ -201,7 +208,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontWeight: FontWeight.w800,
                     color: AppColors.textHighEmphasis,
                   ),
-                ),
+                ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                 const SizedBox(height: 12),
                 Text(
                   '这将使用本地最新的 JSON 文件更新词库定义（如释义、例句）。\n\n您的学习进度将完全保留，不会丢失。',
@@ -211,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     height: 1.5,
                     color: AppColors.textMediumEmphasis,
                   ),
-                ),
+                ).animate().fadeIn(delay: 300.ms),
                 const SizedBox(height: 24),
                 Row(
                   children: [
@@ -256,10 +263,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                   ],
-                ),
+                ).animate().fadeIn(delay: 450.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
               ],
             ),
-          ),
+          ).animate().scale(begin: const Offset(0.9, 0.9), duration: 400.ms, curve: Curves.easeOutBack),
         ),
       ),
     );

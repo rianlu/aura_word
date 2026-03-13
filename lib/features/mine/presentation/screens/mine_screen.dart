@@ -167,8 +167,8 @@ class _MineScreenState extends State<MineScreen> {
                   onTap: _openXhsProfile,
                 )
                 .animate()
-                .fadeIn(duration: 500.ms, delay: 400.ms)
-                .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                .fadeIn(duration: 400.ms, delay: 600.ms)
+                .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 16),
             _buildMenuItem(
                   icon: Icons.settings_rounded,
@@ -183,8 +183,8 @@ class _MineScreenState extends State<MineScreen> {
                   },
                 )
                 .animate()
-                .fadeIn(duration: 500.ms, delay: 500.ms)
-                .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                .fadeIn(duration: 400.ms, delay: 700.ms)
+                .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 16),
             if (kDebugMode)
               _buildMenuItem(
@@ -193,8 +193,8 @@ class _MineScreenState extends State<MineScreen> {
                     onTap: _generateMockData,
                   )
                   .animate()
-                  .fadeIn(duration: 500.ms, delay: 600.ms)
-                  .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                  .fadeIn(duration: 400.ms, delay: 800.ms)
+                  .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
             const SizedBox(height: 40),
             Center(
               child: Text(

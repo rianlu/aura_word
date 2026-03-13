@@ -204,7 +204,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             _buildHeader()
                 .animate()
                 .fadeIn(duration: 400.ms)
-                .slideY(begin: -0.2, end: 0, curve: Curves.easeOutQuad),
+                .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
 
             Expanded(
               child:
@@ -240,22 +240,30 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                                           ),
                                         );
                                       }
+                                      
+                                      // 添加级联动画逻辑，使用 Key 触发重新播放
+                                      final delay = (index % 10) * 40; 
+                                      
                                       return DictionaryWordTile(
+                                        key: ValueKey('${_words[index]['id']}_${_masteryFilter}'),
                                         item: _words[index],
                                         onTap: () =>
                                             DictionaryWordTile.showDetail(
                                               context,
                                               _words[index],
                                             ),
-                                      );
+                                      )
+                                      .animate()
+                                      .fadeIn(duration: 350.ms, delay: delay.ms)
+                                      .slideX(begin: 0.05, end: 0, curve: Curves.easeOutBack);
                                     },
                                   ),
                           ),
                         ],
                       )
                       .animate()
-                      .fadeIn(duration: 500.ms, delay: 200.ms)
-                      .slideY(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+                      .fadeIn(duration: 500.ms, delay: 150.ms)
+                      .slideY(begin: 0.05, end: 0, curve: Curves.easeOutBack),
             ),
           ],
         ),
@@ -490,8 +498,11 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     final isSelected = _masteryFilter == value;
     return GestureDetector(
       onTap: () => _onFilterChanged(value),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        curve: Curves.easeOutCubic,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        transform: Matrix4.identity()..scale(isSelected ? 1.06 : 1.0),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.primary : Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -500,11 +511,17 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               ? [
                   BoxShadow(
                     color: AppColors.primary.withValues(alpha: 0.3),
-                    blurRadius: 8,
+                    blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
                 ]
-              : null,
+              : [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.03),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
         ),
         child: Text(
           label,
@@ -621,7 +638,10 @@ class _UnitSelectionSheet extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
+                )
+                .animate()
+                .fadeIn(duration: 300.ms, delay: (i * 40).ms)
+                .slideX(begin: 0.1, end: 0, curve: Curves.easeOutBack);
               },
             ),
           ),

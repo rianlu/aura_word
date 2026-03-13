@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/database/models/word.dart';
 import '../../../../core/database/models/word_progress.dart';
@@ -121,7 +122,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
                   ),
                 ),
               ],
-            ),
+            ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
 
             const SizedBox(height: 16),
 
@@ -227,7 +228,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
                     ),
                   ],
                 ),
-              ),
+              ).animate().fadeIn(duration: 400.ms, delay: 100.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
             ] else ...[
               Container(
                 padding: const EdgeInsets.all(16),
@@ -249,7 +250,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
                     ),
                   ],
                 ),
-              ),
+              ).animate().fadeIn(duration: 400.ms, delay: 100.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
             ],
 
             const SizedBox(height: 24),
@@ -257,39 +258,49 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
             const SizedBox(height: 24),
 
             // 3. Meaning
-            Text(
-              "释义",
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textMediumEmphasis,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.word.meaning,
-              style: const TextStyle(
-                fontSize: 18,
-                height: 1.5,
-                color: AppColors.textHighEmphasis,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "释义",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textMediumEmphasis,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.word.meaning,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    height: 1.5,
+                    color: AppColors.textHighEmphasis,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ).animate().fadeIn(duration: 400.ms, delay: 200.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
 
             const SizedBox(height: 24),
 
             // 4. Examples (Collapsible)
             if (widget.word.examples.isNotEmpty) ...[
-              Text(
-                "例句",
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textMediumEmphasis,
-                ),
-              ),
-              const SizedBox(height: 12),
-              _buildExampleItem(widget.word.examples.first),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "例句",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textMediumEmphasis,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  _buildExampleItem(widget.word.examples.first),
+                ],
+              ).animate().fadeIn(duration: 400.ms, delay: 300.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
 
               // Collapsible extra examples
               if (widget.word.examples.length > 1) ...[
@@ -300,7 +311,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
                         (ex) => Padding(
                           padding: const EdgeInsets.only(top: 12),
                           child: _buildExampleItem(ex),
-                        ),
+                        ).animate().fadeIn(duration: 300.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
                       ),
 
                 const SizedBox(height: 8),
@@ -338,7 +349,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
                       ),
                     ),
                   ),
-                ),
+                ).animate().fadeIn(delay: 400.ms),
               ],
             ],
           ],

@@ -83,21 +83,21 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                       SizedBox(height: MediaQuery.of(context).padding.top),
                       _buildHeader()
                           .animate()
-                          .fadeIn(duration: 600.ms)
+                          .fadeIn(duration: 400.ms)
                           .slideY(
-                            begin: -0.2,
+                            begin: 0.1,
                             end: 0,
-                            curve: Curves.easeOutQuad,
+                            curve: Curves.easeOutBack,
                           ),
                       const SizedBox(height: 20),
                       if (_dailySentence != null)
                         _buildDailySentenceCard()
                             .animate()
-                            .fadeIn(duration: 600.ms, delay: 200.ms)
+                            .fadeIn(duration: 450.ms, delay: 100.ms)
                             .slideY(
-                              begin: 0.2,
+                              begin: 0.15,
                               end: 0,
-                              curve: Curves.easeOutQuad,
+                              curve: Curves.easeOutBack,
                             ),
 
                       if (_dailySentence != null) const SizedBox(height: 20),
@@ -298,7 +298,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             fontWeight: FontWeight.w800,
             color: AppColors.textHighEmphasis,
           ),
-        ),
+        ).animate().fadeIn(delay: 200.ms).slideX(begin: -0.1, end: 0, curve: Curves.easeOutBack),
         const SizedBox(height: 16),
         LayoutBuilder(
           builder: (context, constraints) {
@@ -308,15 +308,17 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   Expanded(
                     child: _buildLearningButton(context)
                         .animate()
-                        .fadeIn(duration: 600.ms, delay: 400.ms)
-                        .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                        .fadeIn(duration: 500.ms, delay: 300.ms)
+                        .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack)
+                        .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildReviewButton(context)
                         .animate()
-                        .fadeIn(duration: 600.ms, delay: 600.ms)
-                        .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                        .fadeIn(duration: 500.ms, delay: 400.ms)
+                        .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack)
+                        .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                   ),
                 ],
               );
@@ -326,13 +328,15 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               children: [
                 _buildLearningButton(context)
                     .animate()
-                    .fadeIn(duration: 600.ms, delay: 400.ms)
-                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                    .fadeIn(duration: 500.ms, delay: 300.ms)
+                    .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack)
+                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
                 const SizedBox(height: 16),
                 _buildReviewButton(context)
                     .animate()
-                    .fadeIn(duration: 600.ms, delay: 600.ms)
-                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutQuad),
+                    .fadeIn(duration: 500.ms, delay: 400.ms)
+                    .scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack)
+                    .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
               ],
             );
           },

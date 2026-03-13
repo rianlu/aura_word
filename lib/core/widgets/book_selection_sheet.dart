@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../theme/app_colors.dart';
@@ -193,7 +194,10 @@ class BookSelectionSheet {
                           ],
                         ),
                       ),
-                    );
+                    )
+                    .animate()
+                    .fadeIn(duration: 300.ms, delay: (index * 50).ms)
+                    .slideX(begin: 0.1, end: 0, curve: Curves.easeOutBack);
                   },
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../theme/app_colors.dart';
 import 'bubbly_button.dart';
@@ -150,7 +151,7 @@ class AppDialog extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: iconColor, size: 36),
-              ),
+              ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
               const SizedBox(height: 20),
               
               // 逻辑处理
@@ -162,7 +163,7 @@ class AppDialog extends StatelessWidget {
                   fontWeight: FontWeight.w800,
                   color: titleColor,
                 ),
-              ),
+              ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
               
               // 逻辑处理
               if (subtitle != null) ...[
@@ -175,22 +176,22 @@ class AppDialog extends StatelessWidget {
                     height: 1.5,
                     color: subtitleColor,
                   ),
-                ),
+                ).animate().fadeIn(delay: 300.ms),
               ],
               
               // 逻辑处理
               if (content != null) ...[
                 const SizedBox(height: 16),
-                content!,
+                content!.animate().fadeIn(delay: 400.ms),
               ],
               
               const SizedBox(height: 24),
               
               // 逻辑处理
-              _buildButtons(context),
+              _buildButtons(context).animate().fadeIn(delay: 450.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
             ],
           ),
-        ),
+        ).animate().scale(begin: const Offset(0.9, 0.9), duration: 400.ms, curve: Curves.easeOutBack).fadeIn(),
       ),
     );
   }
@@ -332,7 +333,12 @@ class AppBottomSheet extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               itemCount: items.length,
               separatorBuilder: (context, index) => const SizedBox(height: 4),
-              itemBuilder: (context, index) => items[index],
+              itemBuilder: (context, index) {
+                return items[index]
+                    .animate()
+                    .fadeIn(duration: 300.ms, delay: (index * 50).ms)
+                    .slideX(begin: 0.1, end: 0, curve: Curves.easeOutBack);
+              },
             ),
           ),
           // 逻辑处理

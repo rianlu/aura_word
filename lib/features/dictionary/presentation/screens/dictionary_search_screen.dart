@@ -284,6 +284,7 @@ class _DictionarySearchScreenState extends State<DictionarySearchScreen> {
             ),
           );
         }
+        final delay = (index % 10) * 50;
         return DictionaryWordTile(
           item: _results[index],
           onTap: () {
@@ -295,7 +296,10 @@ class _DictionarySearchScreenState extends State<DictionarySearchScreen> {
             FocusScope.of(context).unfocus();
             DictionaryWordTile.showDetail(context, _results[index]);
           },
-        ).animate().fadeIn(duration: 300.ms);
+        )
+        .animate()
+        .fadeIn(duration: 400.ms, delay: delay.ms)
+        .slideX(begin: 0.05, end: 0, curve: Curves.easeOutBack);
       },
     );
   }

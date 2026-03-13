@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/services/audio_service.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
@@ -572,7 +573,7 @@ class _SpellingPracticeViewState extends State<SpellingPracticeView> {
           spacing: wordSpacing,
           runSpacing: 16.0 * scaleFactor,
           children: wordWidgets,
-        );
+        ).animate().fadeIn(duration: 400.ms).scale(begin: const Offset(0.9, 0.9), curve: Curves.easeOutBack);
 
         // 输错时的全局抖动效果
         return TweenAnimationBuilder<double>(
@@ -660,7 +661,10 @@ class _SpellingPracticeViewState extends State<SpellingPracticeView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 for (int i = 0; i < row1.length; i++) ...[
-                  _buildLetterButton(row1[i], size: buttonSize),
+                  _buildLetterButton(row1[i], size: buttonSize)
+                      .animate()
+                      .fadeIn(duration: 300.ms, delay: (i * 50).ms)
+                      .scale(begin: const Offset(0.7, 0.7), curve: Curves.easeOutBack),
                   if (i != row1.length - 1) const SizedBox(width: spacing),
                 ],
               ],
@@ -670,10 +674,16 @@ class _SpellingPracticeViewState extends State<SpellingPracticeView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 for (int i = 0; i < row2.length; i++) ...[
-                  _buildLetterButton(row2[i], size: buttonSize),
+                  _buildLetterButton(row2[i], size: buttonSize)
+                      .animate()
+                      .fadeIn(duration: 300.ms, delay: (200 + i * 50).ms)
+                      .scale(begin: const Offset(0.7, 0.7), curve: Curves.easeOutBack),
                   const SizedBox(width: spacing),
                 ],
-                _buildBackspaceButton(size: buttonSize),
+                _buildBackspaceButton(size: buttonSize)
+                    .animate()
+                    .fadeIn(duration: 300.ms, delay: 350.ms)
+                    .scale(begin: const Offset(0.7, 0.7), curve: Curves.easeOutBack),
               ],
             ),
           ],

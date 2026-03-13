@@ -580,7 +580,14 @@ class _MineProfileSectionState extends State<MineProfileSection> {
             size: 100,
             borderWidth: 3,
           ),
-        ).animate().scale(duration: 500.ms, curve: Curves.easeOutBack),
+        )
+        .animate()
+        .scale(
+          begin: const Offset(0.5, 0.5), 
+          duration: 800.ms, 
+          curve: Curves.elasticOut
+        )
+        .fadeIn(duration: 400.ms),
         const SizedBox(height: 8),
         Text(
           '点击更换头像',
@@ -589,7 +596,7 @@ class _MineProfileSectionState extends State<MineProfileSection> {
             color: AppColors.textMediumEmphasis,
             fontWeight: FontWeight.w600,
           ),
-        ),
+        ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
         const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -617,12 +624,12 @@ class _MineProfileSectionState extends State<MineProfileSection> {
               ),
             ),
           ],
-        ),
+        ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack),
         const SizedBox(height: 40),
         _buildCurrentBookCard()
             .animate()
-            .fadeIn(duration: 500.ms, delay: 300.ms)
-            .slideX(begin: 0.1, end: 0, curve: Curves.easeOutQuad),
+            .fadeIn(duration: 500.ms, delay: 450.ms)
+            .slideY(begin: 0.15, end: 0, curve: Curves.easeOutBack),
       ],
     );
   }

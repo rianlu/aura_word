@@ -10,6 +10,7 @@ This skill guides the implementation of the "Bouncy & Fluid" visual identity for
 - **Snap & Bounce**: Use `Curves.easeOutBack` or `Curves.elasticOut` for primary interactions.
 - **Scale Feedback**: Buttons should scale to `0.92-0.95` on press.
 - **Staggered Entrance**: List items or card groups should enter with a slight `slideY` and `fadeIn` stagger (50-100ms interval).
+- **Static Content for Focus**: Never use infinite loops (e.g., `repeat`) on containers that hold text content for learning (like word cards or examples). Keep animations limited to the "entrance" phase.
 
 ## Implementation Patterns
 
