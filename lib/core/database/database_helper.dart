@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uuid/uuid.dart';
-import 'package:wordcard_coach/core/database/models/word.dart';
+import 'package:aura_word/core/database/models/word.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -24,7 +24,7 @@ class DatabaseHelper {
 
   Future<Database> _initDB() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'wordcard_coach.db');
+    final path = join(dbPath, 'aura_word.db');
 
     return await openDatabase(
       path,
@@ -978,7 +978,7 @@ class DatabaseHelper {
   // 重置数据库的辅助方法（调试用）
   Future<void> resetDB() async {
     final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'wordcard_coach.db');
+    final path = join(dbPath, 'aura_word.db');
     await deleteDatabase(path);
     _database = null;
   }

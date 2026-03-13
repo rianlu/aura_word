@@ -3,7 +3,7 @@ import UIKit
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
-    private let channelName = "com.example.wordcard_coach/file_handler"
+    private let channelName = "com.aura.word/file_handler"
     private var pendingFilePath: String?
     private var eventSink: FlutterEventSink?
     

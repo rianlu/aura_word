@@ -1,4 +1,4 @@
-package com.example.wordcard_coach
+package com.aura.word
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,7 @@ import java.io.File
 import java.io.FileOutputStream
 
 class MainActivity : FlutterActivity() {
-    private val CHANNEL = "com.example.wordcard_coach/file_handler"
+    private val CHANNEL = "com.aura.word/file_handler"
     private var pendingFilePath: String? = null
     private var eventSink: EventChannel.EventSink? = null
 

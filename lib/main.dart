@@ -31,8 +31,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const _channel = MethodChannel('com.example.wordcard_coach/file_handler');
-  static const _eventChannel = EventChannel('com.example.wordcard_coach/file_handler/events');
+  static const _channel = MethodChannel('com.aura.word/file_handler');
+  static const _eventChannel = EventChannel('com.aura.word/file_handler/events');
   
   final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
@@ -83,7 +83,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: _navigatorKey,
-      title: 'WordCard Coach',
+      title: '灵听单词 (AuraWord)',
       theme: AppTheme.lightTheme,
       initialRoute: widget.showSplash ? SplashScreen.routeName : '/',
       routes: {

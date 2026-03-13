@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../features/home/presentation/screens/home_dashboard_screen.dart';
 import '../../../../features/dictionary/presentation/screens/dictionary_screen.dart';
-import 'package:wordcard_coach/features/statistics/presentation/screens/statistics_screen.dart';
+import 'package:aura_word/features/statistics/presentation/screens/statistics_screen.dart';
 import '../../../../features/mine/presentation/screens/mine_screen.dart';
 import '../../../../core/widgets/animated_indexed_stack.dart';
 
@@ -125,10 +125,29 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                    fontSize: 10, 
                    letterSpacing: 0.5
                 ),
-                items: _navItems.map((item) => BottomNavigationBarItem(
-                  icon: Icon(item.icon),
-                  label: item.label,
-                )).toList(),
+                items: _navItems.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final item = entry.value;
+                  final isSelected = _currentIndex == index;
+                  
+                  return BottomNavigationBarItem(
+                    icon: AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOutBack,
+                      transform: Matrix4.identity()
+                        ..scale(isSelected ? 1.2 : 1.0),
+                      child: Icon(item.icon)
+                        .animate(target: isSelected ? 1 : 0)
+                        .scale(
+                          begin: const Offset(1, 1),
+                          end: const Offset(1.15, 1.15),
+                          curve: Curves.elasticOut,
+                          duration: 500.ms,
+                        ),
+                    ),
+                    label: item.label,
+                  );
+                }).toList(),
               ),
             ),
     );

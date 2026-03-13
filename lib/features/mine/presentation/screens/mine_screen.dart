@@ -5,7 +5,7 @@ import 'dart:math' as dart;
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:wordcard_coach/features/mine/presentation/screens/settings_screen.dart';
+import 'package:aura_word/features/mine/presentation/screens/settings_screen.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/database/daos/user_stats_dao.dart';
 import '../../../../core/database/daos/stats_dao.dart';

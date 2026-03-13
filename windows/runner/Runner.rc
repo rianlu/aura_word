@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "wordcard_coach" "\0"
+            VALUE "CompanyName", "com.aura" "\0"
+            VALUE "FileDescription", "aura_word" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "wordcard_coach" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "wordcard_coach.exe" "\0"
-            VALUE "ProductName", "wordcard_coach" "\0"
+            VALUE "InternalName", "aura_word" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.aura. All rights reserved." "\0"
+            VALUE "OriginalFilename", "aura_word.exe" "\0"
+            VALUE "ProductName", "aura_word" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

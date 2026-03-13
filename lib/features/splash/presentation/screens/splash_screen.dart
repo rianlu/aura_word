@@ -341,23 +341,24 @@ class _SplashScreenState extends State<SplashScreen>
     return Column(
       children: [
         Text(
-          'WordCard Coach',
+          '灵听单词 (AuraWord)',
           textAlign: TextAlign.center,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.notoSans(
             fontSize: isCompact ? 24 : 28,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w900,
             color: AppColors.textHighEmphasis,
-            letterSpacing: 0.4,
+            letterSpacing: -0.2,
           ),
         ),
         const SizedBox(height: 8),
         Text(
-          '\u8ba9\u5355\u8bcd\u6210\u4e3a\u4e60\u60ef',
+          '让单词成为习惯',
           textAlign: TextAlign.center,
           style: GoogleFonts.notoSans(
             fontSize: isCompact ? 13 : 14,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             color: AppColors.textMediumEmphasis,
+            letterSpacing: 1.2,
           ),
         ),
       ],

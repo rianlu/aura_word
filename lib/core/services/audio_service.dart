@@ -3,7 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:wordcard_coach/core/database/models/word.dart';
+import 'package:aura_word/core/database/models/word.dart';
 
 /// 音频发音类型
 enum AudioType {
