@@ -31,20 +31,20 @@ class DictionaryWordTile extends StatelessWidget {
 
     if (isLearned) {
       if (mastery == 2) {
-        badgeColor = Colors.green;
+        badgeColor = AppColors.success;
         badgeText = "已掌握";
         badgeIcon = Icons.check_circle;
       } else {
         if (interval >= 8) {
-          badgeColor = const Color(0xFF8BC34A);
+          badgeColor = const Color(0xFF8BC34A); // 保持自然的草绿色
           badgeText = "熟练中";
           badgeIcon = Icons.trending_up;
         } else if (interval >= 3) {
-          badgeColor = const Color(0xFFFF9800);
+          badgeColor = AppColors.warning;
           badgeText = "学习中";
           badgeIcon = Icons.schedule;
         } else {
-          badgeColor = const Color(0xFFFFB74D);
+          badgeColor = const Color(0xFFFB923C); // 浅橙色
           badgeText = "初学";
           badgeIcon = Icons.flag;
         }

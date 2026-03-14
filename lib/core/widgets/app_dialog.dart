@@ -27,7 +27,7 @@ class AppDialog extends StatelessWidget {
     super.key,
     required this.icon,
     this.iconColor = AppColors.primary,
-    this.iconBackgroundColor = const Color(0xFFEFF6FF),
+    this.iconBackgroundColor = AppColors.primaryLight,
     required this.title,
     this.subtitle,
     this.content,
@@ -54,14 +54,14 @@ class AppDialog extends StatelessWidget {
     return AppDialog(
       key: key,
       icon: Icons.check_circle_rounded,
-      iconColor: const Color(0xFF22C55E),
-      iconBackgroundColor: const Color(0xFFF0FDF4),
+      iconColor: AppColors.success,
+      iconBackgroundColor: AppColors.success.withValues(alpha: 0.1),
       title: title,
       subtitle: subtitle,
       content: content,
       primaryButtonText: primaryButtonText,
       onPrimaryPressed: onPrimaryPressed,
-      primaryButtonColor: const Color(0xFF22C55E),
+      primaryButtonColor: AppColors.success,
     );
   }
 
@@ -108,7 +108,7 @@ class AppDialog extends StatelessWidget {
       key: key,
       icon: Icons.help_outline_rounded,
       iconColor: AppColors.primary,
-      iconBackgroundColor: const Color(0xFFEFF6FF),
+      iconBackgroundColor: AppColors.primaryLight,
       title: title,
       subtitle: subtitle,
       content: content,

@@ -362,7 +362,7 @@ class _SpellingPracticeViewState extends State<SpellingPracticeView> {
               // 下部：交互区
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 24), // 缩减底部间距
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -377,7 +377,7 @@ class _SpellingPracticeViewState extends State<SpellingPracticeView> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     _buildHintButton(),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12), // 略微压缩间距
                     _buildKeyboardArea(),
                   ],
                 ),

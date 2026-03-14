@@ -911,7 +911,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isListening
-                        ? const Color(0xFFFF5252)
+                        ? AppColors.error
                         : isProcessing
                         ? _accentColor.withValues(alpha: 0.7)
                         : _accentColor,
@@ -919,7 +919,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
                       BoxShadow(
                         color:
                             (isListening
-                                    ? const Color(0xFFFF5252)
+                                    ? AppColors.error
                                     : _accentColor)
                                 .withValues(alpha: glowAlpha),
                         blurRadius: glowBlur,
@@ -1060,57 +1060,57 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
       case SpeakingState.idle:
       case SpeakingState.playingAudio:
         text = '请听发音...';
-        foregroundColor = AppColors.textMediumEmphasis;
-        backgroundColor = const Color(0xFFF3F6FA);
-        borderColor = const Color(0xFFD9E1EA);
+        foregroundColor = AppColors.primary;
+        backgroundColor = AppColors.primaryLight;
+        borderColor = AppColors.primary.withValues(alpha: 0.2);
         icon = Icons.volume_up_rounded;
         break;
       case SpeakingState.listening:
         if (!_engineIsListening) {
           text = '识别引擎连接中...';
-          foregroundColor = const Color(0xFF546E7A);
-          backgroundColor = const Color(0xFFEEF3F7);
-          borderColor = const Color(0xFFCFD8E1);
+          foregroundColor = AppColors.textMediumEmphasis;
+          backgroundColor = AppColors.surfaceVariant;
+          borderColor = AppColors.shadowWhite;
           icon = Icons.settings_input_antenna_rounded;
         } else if (_lastHeard.isNotEmpty) {
           text = '听到: "$_lastHeard"';
-          foregroundColor = const Color(0xFF00695C);
-          backgroundColor = const Color(0xFFE6F7F4);
-          borderColor = const Color(0xFF9EDFD4);
+          foregroundColor = AppColors.success;
+          backgroundColor = AppColors.success.withValues(alpha: 0.1);
+          borderColor = AppColors.success.withValues(alpha: 0.3);
           icon = Icons.hearing_rounded;
         } else {
           text = '请大声读出来...';
           if (widget.isReviewMode) {
-            foregroundColor = const Color(0xFF6A4E00);
-            backgroundColor = const Color(0xFFFFF3CD);
-            borderColor = const Color(0xFFE5C04A);
+            foregroundColor = const Color(0xFF92400E);
+            backgroundColor = AppColors.secondaryLight;
+            borderColor = AppColors.secondary.withValues(alpha: 0.3);
           } else {
             foregroundColor = AppColors.primary;
-            backgroundColor = const Color(0xFFEAF2FF);
-            borderColor = const Color(0xFFBFD4FF);
+            backgroundColor = AppColors.primaryLight;
+            borderColor = AppColors.primary.withValues(alpha: 0.3);
           }
           icon = Icons.mic_rounded;
         }
         break;
       case SpeakingState.processing:
         text = '准备识别...';
-        foregroundColor = const Color(0xFF5E35B1);
-        backgroundColor = const Color(0xFFF1EBFF);
-        borderColor = const Color(0xFFD6C5FF);
+        foregroundColor = AppColors.tertiary;
+        backgroundColor = AppColors.tertiary.withValues(alpha: 0.1);
+        borderColor = AppColors.tertiary.withValues(alpha: 0.2);
         icon = Icons.sync_rounded;
         break;
       case SpeakingState.success:
         text = '完美!';
-        foregroundColor = const Color(0xFF2E7D32);
-        backgroundColor = const Color(0xFFEAF8EC);
-        borderColor = const Color(0xFFB8E1BE);
+        foregroundColor = AppColors.success;
+        backgroundColor = AppColors.success.withValues(alpha: 0.1);
+        borderColor = AppColors.success.withValues(alpha: 0.3);
         icon = Icons.check_circle_rounded;
         break;
       case SpeakingState.failed:
         text = '再试一次!';
-        foregroundColor = const Color(0xFFEF6C00);
-        backgroundColor = const Color(0xFFFFF1E6);
-        borderColor = const Color(0xFFFFD0AD);
+        foregroundColor = AppColors.error;
+        backgroundColor = AppColors.error.withValues(alpha: 0.05);
+        borderColor = AppColors.error.withValues(alpha: 0.2);
         icon = Icons.refresh_rounded;
         break;
     }

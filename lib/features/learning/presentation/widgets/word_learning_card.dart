@@ -243,7 +243,7 @@ class _WordLearningCardState extends State<WordLearningCard> {
            ),
 
            SizedBox(height: gapLg),
-           const Divider(height: 1, color: Color(0xFFF1F5F9)), 
+           const Divider(height: 1, color: AppColors.shadowWhite), 
            SizedBox(height: gapMd),
            
            Text(

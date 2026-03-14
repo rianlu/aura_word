@@ -224,14 +224,14 @@ class _ReviewSessionScreenState extends State<ReviewSessionScreen> {
             child: Center(
               child: AppDialog(
                 icon: Icons.check_circle_rounded,
-                iconColor: const Color(0xFF664400),
+                iconColor: const Color(0xFF92400E),
                 iconBackgroundColor: AppColors.secondary,
                 title: "复习完成！",
                 subtitle: "你复习了 $_firstPassCount 个单词（共完成 $_totalAttemptCount 题），继续保持！",
                 primaryButtonText: "完成",
                 primaryButtonColor: AppColors.secondary,
-                primaryButtonTextColor: const Color(0xFF664400),
-                titleColor: const Color(0xFF664400),
+                primaryButtonTextColor: const Color(0xFF92400E),
+                titleColor: const Color(0xFF92400E),
                 subtitleColor: const Color(0xCC664400),
                 onPrimaryPressed: () {
                   Navigator.pop(context); // 关闭弹窗
@@ -453,7 +453,7 @@ class _ReviewSessionScreenState extends State<ReviewSessionScreen> {
             child: CircularProgressIndicator(
               value: 1.0 - progress, // 细节处理
               strokeWidth: strokeWidth,
-              color: const Color(0xFFFFC107),
+              color: AppColors.secondary,
               strokeCap: StrokeCap.round,
             ),
           ),
@@ -465,7 +465,7 @@ class _ReviewSessionScreenState extends State<ReviewSessionScreen> {
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: fontSize,
                   fontWeight: FontWeight.w800,
-                  color: const Color(0xFF664400),
+                  color: const Color(0xFF92400E),
                 ),
               ),
               Text(
@@ -736,7 +736,7 @@ class _ReviewSessionScreenState extends State<ReviewSessionScreen> {
                                   style: GoogleFonts.plusJakartaSans(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w800,
-                                    color: const Color(0xFF664400),
+                                    color: const Color(0xFF92400E),
                                   ),
                                 ),
                               ),

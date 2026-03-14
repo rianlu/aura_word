@@ -47,8 +47,8 @@ class _MasteryPieChartState extends State<MasteryPieChart> {
             children: [
               Container(
                 padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(color: const Color(0xFFF3E8FF), borderRadius: BorderRadius.circular(8)),
-                child: const Icon(Icons.pie_chart_rounded, color: Color(0xFF9333EA), size: 20),
+                decoration: BoxDecoration(color: AppColors.primaryLight, borderRadius: BorderRadius.circular(8)),
+                child: const Icon(Icons.pie_chart_rounded, color: AppColors.primary, size: 20),
               ),
               const SizedBox(width: 12),
               Text('词汇掌握度', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textHighEmphasis)),

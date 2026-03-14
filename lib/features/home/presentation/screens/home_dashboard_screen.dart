@@ -417,13 +417,13 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               color: Colors.black.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.style, color: Color(0xFF664400), size: 32),
+            child: const Icon(Icons.style, color: Color(0xFF92400E), size: 32),
           ),
           const SizedBox(height: 12),
           Text(
             '复习',
             style: GoogleFonts.plusJakartaSans(
-              color: const Color(0xFF664400),
+              color: const Color(0xFF92400E),
               fontWeight: FontWeight.w900,
               fontSize: 18,
             ),
@@ -433,7 +433,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             '保持记忆清晰！',
             textAlign: TextAlign.center,
             style: GoogleFonts.plusJakartaSans(
-              color: const Color(0xAA664400),
+              color: const Color(0xAA92400E),
               fontWeight: FontWeight.bold,
               fontSize: 14,
             ),

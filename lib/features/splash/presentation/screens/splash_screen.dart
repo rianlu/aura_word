@@ -72,10 +72,10 @@ class _SplashScreenState extends State<SplashScreen>
           body: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFF5F7F8),
+                  AppColors.background,
                   Color(0xFFEAF2FF),
                   Color(0xFFFFF4D6),
                 ],
@@ -252,7 +252,7 @@ class _SplashScreenState extends State<SplashScreen>
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: const Color(0xFFF1F5F9), width: 1),
+        border: Border.all(color: AppColors.shadowWhite, width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.12),

@@ -254,7 +254,7 @@ class _WordDetailSheetState extends State<WordDetailSheet> {
             ],
 
             const SizedBox(height: 24),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF1F5F9)),
+            const Divider(height: 1, thickness: 1, color: AppColors.shadowWhite),
             const SizedBox(height: 24),
 
             // 3. Meaning

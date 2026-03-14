@@ -77,11 +77,11 @@ class _AnimatedSpeakerButtonState extends State<AnimatedSpeakerButton>
     final playing = widget.playingColor ?? defaultPlaying;
     final currentColor = widget.isPlaying ? playing : primary;
     final iconColor = _resolveIconColor(widget.variant, widget.isPlaying);
-    final glowAlpha = widget.isPlaying ? _glowActiveAlpha : _glowIdleAlpha;
-    final glowBlur = widget.isPlaying ? _glowActiveBlur : _glowIdleBlur;
-    final glowYOffset = widget.isPlaying
-        ? _glowActiveYOffset
-        : _glowIdleYOffset;
+    
+    // 动态阴影逻辑：播放时大幅提升阴影扩散和亮度
+    final glowAlpha = widget.isPlaying ? 0.45 : _glowIdleAlpha;
+    final glowBlur = widget.isPlaying ? 28.0 : _glowIdleBlur;
+    final glowYOffset = widget.isPlaying ? 10.0 : _glowIdleYOffset;
 
     return GestureDetector(
       onTap: widget.onPressed,
@@ -91,7 +91,7 @@ class _AnimatedSpeakerButtonState extends State<AnimatedSpeakerButton>
           return Transform.scale(
             scale: widget.isPlaying ? _pulseAnimation.value : 1.0,
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 250), // 稍缓一点，增加优雅感
               padding: EdgeInsets.all(widget.size * 0.5),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -101,6 +101,7 @@ class _AnimatedSpeakerButtonState extends State<AnimatedSpeakerButton>
                     color: currentColor.withValues(alpha: glowAlpha),
                     blurRadius: glowBlur,
                     offset: Offset(0, glowYOffset),
+                    spreadRadius: widget.isPlaying ? 2 : 0, // 播放时额外扩散
                   ),
                 ],
               ),
@@ -121,24 +122,27 @@ class _AnimatedSpeakerButtonState extends State<AnimatedSpeakerButton>
   (Color, Color) _resolveVariantColors(SpeakerButtonVariant variant) {
     switch (variant) {
       case SpeakerButtonVariant.learning:
-        // 学习模式：播放中更亮，不做压暗
-        return (AppColors.primary, const Color(0xFF4A97FF));
+        // 学习模式：始终保持品牌蓝，通过脉冲和光晕体现播放感
+        return (AppColors.primary, AppColors.primary); 
       case SpeakerButtonVariant.review:
-        // 复习模式：播放中更亮的黄
-        return (AppColors.secondary, const Color(0xFFFFD84D));
+        // 复习模式：始终保持琥珀黄
+        return (AppColors.secondary, AppColors.secondary); 
       case SpeakerButtonVariant.neutral:
-        return (const Color(0xFFE2E8F0), const Color(0xFF94A3B8));
+        // 中性模式：静止灰色 -> 播放激活品牌蓝
+        return (AppColors.surfaceVariant, AppColors.primary);
     }
   }
 
   Color _resolveIconColor(SpeakerButtonVariant variant, bool isPlaying) {
+    if (isPlaying) return Colors.white; // 播放中一律白色，确保高对比度
+
     switch (variant) {
       case SpeakerButtonVariant.learning:
-        return Colors.white;
       case SpeakerButtonVariant.review:
         return Colors.white;
       case SpeakerButtonVariant.neutral:
-        return isPlaying ? Colors.white : const Color(0xFF475569);
+        // 首页静止态使用品牌蓝图标，灰色背景，看起来更精致
+        return AppColors.primary;
     }
   }
 }

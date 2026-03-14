@@ -476,26 +476,26 @@ class _WordSelectionViewState extends State<WordSelectionView> {
       if (isSelectedAndCorrect) {
         // 正确且被选中：复习模式使用黄系，学习模式使用绿系
         if (widget.isReviewMode) {
-          bgColor = const Color(0xFFFFE082);
-          borderColor = const Color(0xFFFFC107);
-          shadowColor = const Color(0xFFD4AA00);
-          textColor = const Color(0xFF664400);
+          bgColor = const Color(0xFFFEF3C7); // Amber 100
+          borderColor = AppColors.secondary;
+          shadowColor = AppColors.shadowYellow;
+          textColor = const Color(0xFF92400E); // Amber 900
         } else {
-          bgColor = AppColors.primary;
-          borderColor = const Color(0xFF1A5DBD);
+          bgColor = AppColors.primaryLight;
+          borderColor = AppColors.primary;
           shadowColor = AppColors.shadowBlue;
-          textColor = Colors.white;
+          textColor = AppColors.primary;
         }
       } else if (isSelected) {
         // 错误
-        bgColor = const Color(0xFFF87171); // 红色 400
-        borderColor = const Color(0xFFEF4444); // 红色 500
-        shadowColor = const Color(0xFFB91C1C); // 红色 700
-        textColor = Colors.white;
+        bgColor = const Color(0xFFFEE2E2); // Red 100
+        borderColor = AppColors.error;
+        shadowColor = const Color(0xFFDC2626).withValues(alpha: 0.4); 
+        textColor = AppColors.error;
       } else {
         // 其他选项
-        bgColor = Colors.grey.shade100;
-        textColor = Colors.grey.shade400;
+        bgColor = AppColors.surfaceVariant;
+        textColor = AppColors.textLowEmphasis;
         yOffset = 0; // 按下效果
         shadowColor = Colors.transparent;
       }
@@ -503,8 +503,8 @@ class _WordSelectionViewState extends State<WordSelectionView> {
       // 正常状态
       // 逻辑处理
       bgColor = Colors.white;
-      borderColor = Colors.grey.shade200;
-      shadowColor = Colors.grey.shade300;
+      borderColor = AppColors.surfaceVariant;
+      shadowColor = AppColors.shadowWhite;
     }
 
     return GestureDetector(

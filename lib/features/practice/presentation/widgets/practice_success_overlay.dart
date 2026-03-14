@@ -30,10 +30,10 @@ class PracticeSuccessOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isReview = variant == PracticeSuccessVariant.review;
-    final accentColor = isReview ? const Color(0xFFFFC107) : AppColors.primary;
-    final accentTextColor = isReview ? const Color(0xFF664400) : AppColors.primary;
-    final iconBgColor = isReview ? const Color(0xFFFFF3CD) : const Color(0xFFEAF3FF);
-    final iconColor = isReview ? const Color(0xFFB98A00) : AppColors.primary;
+    final accentColor = isReview ? AppColors.secondary : AppColors.primary;
+    final accentTextColor = isReview ? const Color(0xFF92400E) : AppColors.primary; // 深琥珀色文字
+    final iconBgColor = isReview ? AppColors.secondaryLight : const Color(0xFFEAF3FF);
+    final iconColor = isReview ? const Color(0xFFB45309) : AppColors.primary; // 琥珀强调色
 
     return BackdropFilter(
       filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
