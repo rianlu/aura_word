@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/database/models/word.dart';
+import '../../../../core/speech/pronunciation_scorer.dart';
 import 'dart:math' as math;
 
 enum PracticeSuccessVariant {
@@ -16,6 +17,7 @@ class PracticeSuccessOverlay extends StatelessWidget {
   final String? subtitle;
   final int stars; // 口语练习的星级（1-3 星）
   final PracticeSuccessVariant variant;
+  final List<PhonemeMark> phonemes;
 
   const PracticeSuccessOverlay({
     super.key,
@@ -24,6 +26,7 @@ class PracticeSuccessOverlay extends StatelessWidget {
     this.subtitle,
     this.stars = 0, // 0 表示不显示星级（拼写练习）
     this.variant = PracticeSuccessVariant.learning,
+    this.phonemes = const [],
   });
 
 
@@ -142,6 +145,10 @@ class PracticeSuccessOverlay extends StatelessWidget {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
+                                if (phonemes.isNotEmpty) ...[
+                                  const SizedBox(height: 8),
+                                  PhonemeStrip(phonemes: phonemes),
+                                ],
                               ],
                             ),
                           ),
@@ -165,6 +172,172 @@ class PracticeSuccessOverlay extends StatelessWidget {
                        },
                      ),
                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PhonemeStrip extends StatelessWidget {
+  final List<PhonemeMark> phonemes;
+
+  const PhonemeStrip({super.key, required this.phonemes});
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 4,
+      runSpacing: 4,
+      children: [
+        for (final phone in phonemes)
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: phone.ok
+                  ? AppColors.success.withValues(alpha: 0.12)
+                  : AppColors.error.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              '/${phone.symbol}/',
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 12,
+                fontWeight: FontWeight.w800,
+                color: phone.ok ? AppColors.success : AppColors.error,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class PracticeRetryOverlay extends StatelessWidget {
+  final Word word;
+  final String heard;
+  final String hint;
+  final List<PhonemeMark> phonemes;
+  final PracticeSuccessVariant variant;
+  final VoidCallback onRetry;
+
+  const PracticeRetryOverlay({
+    super.key,
+    required this.word,
+    required this.heard,
+    required this.hint,
+    required this.onRetry,
+    this.phonemes = const [],
+    this.variant = PracticeSuccessVariant.learning,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final isReview = variant == PracticeSuccessVariant.review;
+    final accentColor = isReview ? AppColors.secondary : AppColors.primary;
+    final accentTextColor = isReview ? const Color(0xFF92400E) : AppColors.primary;
+    final weakCount = phonemes.where((phone) => !phone.ok).length;
+    final nearMiss = weakCount == 1;
+
+    return BackdropFilter(
+      filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+      child: Container(
+        color: Colors.black.withValues(alpha: 0.05),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 420),
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              padding: const EdgeInsets.fromLTRB(24, 22, 24, 18),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '没对上',
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1,
+                      color: accentTextColor,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    word.text,
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w900,
+                      color: accentTextColor,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  if (nearMiss) ...[
+                    PhonemeStrip(phonemes: phonemes),
+                    const SizedBox(height: 8),
+                    Text(
+                      hint,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.textHighEmphasis,
+                      ),
+                    ),
+                  ] else ...[
+                    Text(
+                      heard.isEmpty ? '这次没有听清' : '听到的是「$heard」',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        height: 1.4,
+                        color: AppColors.textHighEmphasis,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '和这个单词不一样',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textMediumEmphasis,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: onRetry,
+                      style: TextButton.styleFrom(
+                        backgroundColor: accentColor.withValues(alpha: 0.12),
+                        foregroundColor: accentTextColor,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      child: Text(
+                        '再读一次',
+                        style: GoogleFonts.plusJakartaSans(
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

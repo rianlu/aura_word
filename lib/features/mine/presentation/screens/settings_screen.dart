@@ -6,6 +6,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/services/backup_service.dart';
 import '../../../../core/widgets/bubbly_button.dart';
 import '../../../../core/database/database_helper.dart';
+import '../widgets/speech_recognizer_settings_section.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -42,6 +43,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
           children: [
+            _buildSectionHeader('跟读')
+                .animate()
+                .fadeIn(duration: 400.ms)
+                .slideX(begin: -0.1, end: 0, curve: Curves.easeOutBack),
+            const SizedBox(height: 12),
+            const SpeechPracticeSettingsSection()
+                .animate()
+                .fadeIn(delay: 80.ms)
+                .slideY(begin: 0.1, end: 0, curve: Curves.easeOutBack),
+            const SizedBox(height: 32),
             _buildSectionHeader('数据管理')
                 .animate()
                 .fadeIn(duration: 400.ms)

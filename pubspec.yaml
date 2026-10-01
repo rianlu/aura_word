@@ -53,6 +53,9 @@ dependencies:
   path: ^1.8.3
   fl_chart: ^0.63.0
   crypto: ^3.0.6
+  sherpa_onnx: ^1.13.8
+  record: ^7.1.1
+  archive: ^4.3.0
 
 dev_dependencies:
   flutter_test:

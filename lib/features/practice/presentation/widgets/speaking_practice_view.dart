@@ -4,8 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/database/models/word.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/services/audio_service.dart';
+import '../../../../core/services/offline_asr_service.dart';
+import '../../../../core/services/speech_recognizer_settings.dart';
 import '../../../../core/services/speech_service.dart';
-import '../../../../core/utils/phonetic_utils.dart';
+import '../../../../core/services/pronunciation_settings.dart';
+import '../../../../core/speech/pronunciation_scorer.dart';
+import '../../../../core/widgets/offline_asr_download_dialog.dart';
 import '../../../../core/widgets/animated_speaker_button.dart';
 
 import 'practice_success_overlay.dart';
@@ -60,6 +64,11 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
   int _sessionToken = 0; // 用于隔离旧异步回调
   bool _isStartingRecognition = false; // 防并发 startListening
   bool _engineIsListening = false; // 引擎底层真实监听状态
+  bool _systemEngineFailed = false;
+  bool _showOfflineOffer = false;
+  bool _acceptEngineStop = false;
+  String _phonemeHint = '';
+  List<PhonemeMark> _phonemeMarks = const [];
 
   // 计时器
   Timer? _skipTimer;
@@ -102,6 +111,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     _sessionToken++;
     final token = _sessionToken;
     _cancelAllTimers();
+    OfflineAsrService.instance.cancelCapture();
     await SpeechService().cancel();
     if (!mounted || token != _sessionToken) return;
 
@@ -128,16 +138,17 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     _cancelAllTimers();
     _engineListeningSub?.cancel();
     _pulseController.dispose();
+    OfflineAsrService.instance.cancelCapture();
     SpeechService().cancel(); // Key 机制保证新实例在旧实例 dispose 后才创建
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   void _handleEngineListeningChanged(bool isListening) {
-    if (!mounted) return;
+    if (!mounted || !_acceptEngineStop) return;
     _engineIsListening = isListening;
     if (isListening) return;
-    // 引擎意外停止时，UI 主动收敛到失败态，避免界面仍显示“正在监听”
+    // 只在系统识别已经真正开始后，才把意外停止当成失败。
     if (_state == SpeakingState.listening) {
       _handleStartListeningFailed('识别已停止，请重试');
     }
@@ -170,11 +181,23 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     await Future.delayed(const Duration(milliseconds: 200));
     if (!mounted || currentToken != _sessionToken) return;
 
-    // 播放标准音的同时，后台预初始化语音引擎（避免第一次超时）
+    // 先播完标准音再初始化识别。系统识别在这台手机上会抢占麦克风和音频焦点，
+    // 与播放同时进行时，标准音会被立刻掐掉。
     setState(() => _state = SpeakingState.playingAudio);
-    unawaited(SpeechService().ensureInitialized());
 
-    await AudioService().playWord(widget.word);
+    final mode = await SpeechRecognizerSettings.instance.getMode();
+    if (!mounted || currentToken != _sessionToken) return;
+    if (mode == SpeechRecognizerMode.offline) {
+      unawaited(OfflineAsrService.instance.warmUp());
+    }
+
+    try {
+      await AudioService()
+          .playWord(widget.word)
+          .timeout(const Duration(seconds: 8));
+    } catch (e) {
+      debugPrint('Standard audio skipped: $e');
+    }
     if (!mounted || currentToken != _sessionToken) return;
     _hasPlayedAudioForCurrentWord = true;
 
@@ -184,6 +207,13 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
 
     // 开始监听
     unawaited(_beginListening(currentToken));
+  }
+
+  Future<bool> _shouldUseOffline() async {
+    final mode = await SpeechRecognizerSettings.instance.getMode();
+    if (mode == SpeechRecognizerMode.offline) return true;
+    if (mode == SpeechRecognizerMode.system) return false;
+    return _systemEngineFailed && await OfflineAsrService.instance.isInstalled();
   }
 
   Future<void> _beginListening([int? token]) async {
@@ -203,12 +233,27 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     // 启动前清理旧计时器
     _skipTimer?.cancel();
     _listenTimeoutTimer?.cancel();
+    _acceptEngineStop = false;
 
     setState(() {
-      _state = SpeakingState.processing;
+      _state = SpeakingState.listening;
       _lastHeard = '';
+      _showOfflineOffer = false;
+    });
+    _engineIsListening = true;
+    _pulseController.repeat();
+    _skipTimer = Timer(const Duration(seconds: _skipButtonDelaySeconds), () {
+      if (mounted) setState(() {});
     });
     _isStartingRecognition = false;
+
+    final useOffline = await _shouldUseOffline();
+    if (!mounted || currentToken != _sessionToken) return;
+
+    if (useOffline) {
+      await _beginOfflineListening(currentToken);
+      return;
+    }
 
     bool success = false;
     try {
@@ -220,23 +265,75 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     }
     if (!mounted || currentToken != _sessionToken) return;
     if (!success) {
+      final mode = await SpeechRecognizerSettings.instance.getMode();
+      if (!mounted || currentToken != _sessionToken) return;
+      if (mode == SpeechRecognizerMode.auto) {
+        _systemEngineFailed = true;
+        if (await OfflineAsrService.instance.isInstalled()) {
+          if (!mounted || currentToken != _sessionToken) return;
+          await _beginOfflineListening(currentToken);
+          return;
+        }
+        _showOfflineOffer = true;
+      }
       _handleStartListeningFailed('识别引擎启动超时或失败');
       return;
     }
 
-    setState(() {
-      _state = SpeakingState.listening;
-    });
-    _engineIsListening = true;
-    _pulseController.repeat();
-
-    // 控制跳过按钮显示时机
-    _skipTimer = Timer(const Duration(seconds: _skipButtonDelaySeconds), () {
-      if (mounted) setState(() {}); // 刷新界面
-    });
-
-    // 监听超时保护（检测到有效语音后会自动续期）
+    _acceptEngineStop = true;
     _armListenTimeout(currentToken);
+  }
+
+  Future<void> _beginOfflineListening(int token) async {
+    if (!await OfflineAsrService.instance.isInstalled()) {
+      if (!mounted || token != _sessionToken) return;
+      setState(() => _showOfflineOffer = true);
+      _handleStartListeningFailed('离线识别模型还没下载');
+      return;
+    }
+
+    await SpeechService().cancel();
+    if (!mounted || token != _sessionToken) return;
+
+    String? text;
+    try {
+      text = await OfflineAsrService.instance.captureAndTranscribe(
+        isCancelled: () => !mounted || token != _sessionToken,
+      );
+    } on OfflineAsrException catch (e) {
+      debugPrint('Offline ASR failed: $e');
+      if (!mounted || token != _sessionToken) return;
+      _handleStartListeningFailed(e.message);
+      return;
+    } catch (e) {
+      debugPrint('Offline ASR failed: $e');
+      if (!mounted || token != _sessionToken) return;
+      _handleStartListeningFailed('离线识别失败');
+      return;
+    }
+
+    if (!mounted || token != _sessionToken || text == null) return;
+    if (text.isEmpty) {
+      _handleStartListeningFailed('没有听清，请再试一次');
+      return;
+    }
+
+    if (_state != SpeakingState.listening) {
+      setState(() => _state = SpeakingState.listening);
+    }
+    _engineIsListening = true;
+    setState(() => _lastHeard = text!);
+    _handleSpeechResult(text, isFinal: true);
+  }
+
+  Future<void> _downloadOfflineAndRetry() async {
+    final ok = await OfflineAsrDownloadDialog.show(context);
+    if (!ok || !mounted) return;
+    await SpeechRecognizerSettings.instance.setMode(SpeechRecognizerMode.offline);
+    _systemEngineFailed = true;
+    if (!mounted) return;
+    setState(() => _showOfflineOffer = false);
+    await _beginListening(_sessionToken);
   }
 
   Future<bool> _startSpeechRecognition([int? token]) async {
@@ -264,7 +361,9 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
 
   void _handleStartListeningFailed(String reason) {
     debugPrint('Start listening failed: $reason');
+    _acceptEngineStop = false;
     _cancelAllTimers();
+    OfflineAsrService.instance.cancelCapture();
     SpeechService().stopListening();
     _pulseController.stop();
     _pulseController.reset();
@@ -295,8 +394,11 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     );
   }
 
-  void _handleSpeechResult(String text, {required bool isFinal}) {
-    if (!mounted || _state != SpeakingState.listening) return;
+  Future<void> _handleSpeechResult(String text, {required bool isFinal}) async {
+    if (!mounted) return;
+    if (_state != SpeakingState.listening && _state != SpeakingState.processing) {
+      return;
+    }
 
     final recognized = text
         .toLowerCase()
@@ -304,152 +406,35 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
         .trim();
     if (recognized.isEmpty) return;
 
-    // 有语音输入就续期，避免“还在说就超时”
+    if (!isFinal) return;
+
     _armListenTimeout(_sessionToken);
     setState(() => _lastHeard = recognized);
 
-    // 中间结果只更新 UI，不做通过/失败判定
-    if (!isFinal) return;
-
-    final target = widget.word.text
-        .toLowerCase()
-        .replaceAll(RegExp(r'[^\w\s]'), '')
-        .trim();
-
-    // 计算匹配质量与星级
-    final stars = _calculateStars(recognized, target);
-
-    // 2 星以上才自动通过
-    if (stars >= 2) {
-      _handleResult(stars, recognized);
-    } else if (stars == 1) {
-      // 部分匹配时提示重试
-      debugPrint('Partial match only (1 star), prompting retry');
-      _listenTimeoutTimer?.cancel(); // 已有输入，取消超时
-      _showRetryPrompt(recognized);
+    final strictness = await PronunciationSettings.instance.getStrictness();
+    if (!mounted) return;
+    if (_state != SpeakingState.listening && _state != SpeakingState.processing) {
+      return;
+    }
+    final verdict = PronunciationScorer.score(
+      targetText: widget.word.text,
+      phonetic: widget.word.displayPhonetic,
+      recognized: recognized,
+      strictness: strictness,
+    );
+    _phonemeMarks = verdict.phonemes;
+    if (verdict.passed) {
+      _phonemeHint = '';
+      _handleResult(verdict.stars, recognized);
     } else {
-      // 最终结果完全未匹配，进入重试态
-      _showRetryPrompt(recognized);
+      _phonemeHint = verdict.hint;
+      _showRetryPrompt();
     }
   }
 
-  /// 根据匹配质量计算星级
-  /// 规范教育场景常见缩写
-  /// 将缩写映射为发音形式以提高匹配
-  String _normalizeAbbreviations(String text) {
-    final abbreviations = {
-      'sb.': 'somebody',
-      'sb': 'somebody',
-      'sth.': 'something',
-      'sth': 'something',
-      'esp.': 'especially',
-      'etc.': 'et cetera',
-      'e.g.': 'for example',
-      'i.e.': 'that is',
-      'vs.': 'versus',
-      'adj.': 'adjective',
-      'adv.': 'adverb',
-      'n.': 'noun',
-      'v.': 'verb',
-      'prep.': 'preposition',
-    };
-
-    String result = text.toLowerCase();
-    abbreviations.forEach((abbr, full) {
-      result = result.replaceAll(abbr.toLowerCase(), full);
-    });
-
-    // 移除标点以便匹配
-    result = result
-        .replaceAll(RegExp(r'[^\w\s]'), ' ')
-        .replaceAll(RegExp(r'\s+'), ' ')
-        .trim();
-
-    return result;
-  }
-
-  /// 根据识别匹配度计算星级
-  int _calculateStars(String recognized, String target) {
-    // 规范化字符串以便比较
-    String normalizedRecognized = _normalizeAbbreviations(recognized);
-    String normalizedTarget = _normalizeAbbreviations(target);
-    final recognizedWords = normalizedRecognized
-        .split(' ')
-        .where((w) => w.isNotEmpty)
-        .toList();
-    final targetWords = normalizedTarget
-        .split(' ')
-        .where((w) => w.isNotEmpty)
-        .toList();
-
-    // 完全匹配（避免使用子串 contains 导致误判）
-    if (normalizedRecognized == normalizedTarget) {
-      return 3; // 完全匹配
-    }
-    // 单词场景：识别结果中任一词精确命中目标词
-    if (targetWords.length == 1 &&
-        recognizedWords.any((w) => w == normalizedTarget)) {
-      return 3;
-    }
-
-    // 使用编辑距离判断近似
-    final int distance = _levenshtein(normalizedRecognized, normalizedTarget);
-    final int targetLen = normalizedTarget.replaceAll(' ', '').length;
-    final int strict3StarThreshold = targetLen <= 5
-        ? 1
-        : (targetLen <= 9 ? 2 : 3);
-    final int tolerant2StarThreshold = targetLen <= 5
-        ? 2
-        : (targetLen <= 9 ? 4 : 5);
-
-    if (distance <= strict3StarThreshold) {
-      return 3; // 非常接近，视为完美匹配
-    }
-
-    if (distance <= tolerant2StarThreshold) {
-      return 2; // 匹配良好
-    }
-
-    // 使用 音标算法 做语音相似匹配
-    String targetSoundex = PhoneticUtils.soundex(normalizedTarget);
-    for (String word in recognizedWords) {
-      if (PhoneticUtils.soundex(word) == targetSoundex) {
-        return 2; // 发音相似
-      }
-    }
-
-    // 多词场景：逐词容错
-    int matchedWords = 0;
-    for (String tw in targetWords) {
-      if (tw.length < 2) continue; // 跳过过短的词
-      if (recognizedWords.any((rw) => rw == tw || _levenshtein(rw, tw) <= 1)) {
-        matchedWords++;
-      }
-    }
-
-    // 大部分匹配则判定为较好
-    if (targetWords.isNotEmpty && matchedWords >= targetWords.length * 0.7) {
-      return 2;
-    }
-
-    // 单词场景进一步放宽：允许一个音节左右误差
-    if (targetWords.length == 1 &&
-        recognizedWords.any(
-          (w) => _levenshtein(w, normalizedTarget) <= (targetLen <= 6 ? 2 : 3),
-        )) {
-      return 1; // 部分匹配时提示重试
-    }
-
-    // 检测到语音但未匹配时返回 1
-    if (recognized.isNotEmpty) {
-      return 1;
-    }
-
-    return 0; // 完全未匹配
-  }
 
   /// 检测到语音但匹配差时进入失败态，等待用户手动重新开始
-  void _showRetryPrompt(String recognized) {
+  void _showRetryPrompt() {
     if (!mounted) return;
 
     // 播放错误音效
@@ -458,6 +443,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     // 取消计时并停止当前监听
     _skipTimer?.cancel();
     _listenTimeoutTimer?.cancel();
+    _acceptEngineStop = false;
     SpeechService().stopListening();
     _pulseController.stop();
     _engineIsListening = false;
@@ -466,12 +452,37 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
       _state = SpeakingState.failed;
     });
     _isStartingRecognition = false;
+    _showRetryOverlay();
+  }
+
+  void _showRetryOverlay() {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'Retry',
+      barrierColor: Colors.transparent,
+      transitionDuration: Duration.zero,
+      pageBuilder: (context, a1, a2) {
+        return PracticeRetryOverlay(
+          word: widget.word,
+          heard: _lastHeard,
+          hint: _phonemeHint,
+          phonemes: _phonemeMarks,
+          variant: widget.isReviewMode
+              ? PracticeSuccessVariant.review
+              : PracticeSuccessVariant.learning,
+          onRetry: () => Navigator.of(context).pop(),
+        );
+      },
+    );
   }
 
   void _handleResult(int stars, String recognized) {
     if (!mounted || _state == SpeakingState.success) return;
 
     _cancelAllTimers();
+    _acceptEngineStop = false;
+    OfflineAsrService.instance.cancelCapture();
     SpeechService().stopListening();
     _pulseController.stop();
     _pulseController.reset();
@@ -490,6 +501,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
   Future<void> _skip() async {
     _sessionToken++;
     _cancelAllTimers();
+    OfflineAsrService.instance.cancelCapture();
     await SpeechService().cancel();
     if (!mounted) return;
     _pulseController.stop();
@@ -549,6 +561,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
           word: widget.word,
           title: _getStarTitle(stars),
           stars: stars,
+          phonemes: _phonemeMarks,
           variant: widget.isReviewMode
               ? PracticeSuccessVariant.review
               : PracticeSuccessVariant.learning,
@@ -585,35 +598,6 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     }
   }
 
-  // 编辑距离算法
-  int _levenshtein(String s, String t) {
-    if (s == t) return 0;
-    if (s.isEmpty) return t.length;
-    if (t.isEmpty) return s.length;
-
-    List<int> v0 = List<int>.filled(t.length + 1, 0);
-    List<int> v1 = List<int>.filled(t.length + 1, 0);
-
-    for (int i = 0; i < t.length + 1; i++) {
-      v0[i] = i;
-    }
-
-    for (int i = 0; i < s.length; i++) {
-      v1[0] = i + 1;
-      for (int j = 0; j < t.length; j++) {
-        int cost = (s[i] == t[j]) ? 0 : 1;
-        v1[j + 1] = [
-          v1[j] + 1,
-          v0[j + 1] + 1,
-          v0[j] + cost,
-        ].reduce((min, e) => e < min ? e : min);
-      }
-      for (int j = 0; j < t.length + 1; j++) {
-        v0[j] = v1[j];
-      }
-    }
-    return v1[t.length];
-  }
 
   /// 判断是否显示跳过按钮
   bool _shouldShowSkipButton() {
@@ -664,6 +648,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
                                 ),
                                 const SizedBox(height: 24),
                                 _buildStatusHUD(scale: wideScale),
+                                _buildOfflineOffer(),
                               ],
                             ),
                           ),
@@ -714,6 +699,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
                           _buildTargetWord(),
                           const SizedBox(height: 20),
                           _buildStatusHUD(),
+                          _buildOfflineOffer(),
                           const SizedBox(height: 22),
                         ],
                       ),
@@ -1048,6 +1034,25 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     );
   }
 
+  Widget _buildOfflineOffer() {
+    if (!_showOfflineOffer || _state != SpeakingState.failed) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: TextButton(
+        onPressed: _downloadOfflineAndRetry,
+        child: Text(
+          '下载离线识别（约 30MB）',
+          style: GoogleFonts.plusJakartaSans(
+            fontWeight: FontWeight.w800,
+            color: AppColors.primary,
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildStatusHUD({double scale = 1.0}) {
     final textScale = _isLearningMode ? scale : 1.0;
     String text;
@@ -1107,7 +1112,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
         icon = Icons.check_circle_rounded;
         break;
       case SpeakingState.failed:
-        text = '再试一次!';
+        text = '点麦克风再读';
         foregroundColor = AppColors.error;
         backgroundColor = AppColors.error.withValues(alpha: 0.05);
         borderColor = AppColors.error.withValues(alpha: 0.2);

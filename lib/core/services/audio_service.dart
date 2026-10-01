@@ -95,8 +95,10 @@ class AudioService {
              return;
           }
 
-          // 下载并播放
-          File file = await _cacheManager.getSingleFile(url);
+          // 下载并播放。国内网络下有道偶发无响应，避免一直停在「请听发音」。
+          File file = await _cacheManager
+              .getSingleFile(url)
+              .timeout(const Duration(seconds: 4));
           if (await file.exists()) {
              await _audioPlayer.play(DeviceFileSource(file.path));
              try {
@@ -130,7 +132,9 @@ class AudioService {
            }
 
            // 下载并播放
-           File file = await _cacheManager.getSingleFile(googleUrl);
+           File file = await _cacheManager
+               .getSingleFile(googleUrl)
+               .timeout(const Duration(seconds: 4));
            if (await file.exists()) {
              await _audioPlayer.play(DeviceFileSource(file.path));
              try {
