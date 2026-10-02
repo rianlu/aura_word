@@ -12,8 +12,8 @@ import 'package:record/record.dart';
 import 'package:sherpa_onnx/sherpa_onnx.dart' as sherpa;
 
 const _modelUrls = [
-  'https://modelscope.cn/models/csukuangfj/asr-models/resolve/master/sherpa-onnx-moonshine-tiny-en-quantized-2026-02-27.tar.bz2',
-  'https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-moonshine-tiny-en-quantized-2026-02-27.tar.bz2',
+  'https://modelscope.cn/models/csukuangfj/asr-models/resolve/master/sherpa-onnx-moonshine-base-en-quantized-2026-02-27.tar.bz2',
+  'https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-moonshine-base-en-quantized-2026-02-27.tar.bz2',
 ];
 
 const _encoderName = 'encoder_model.ort';
@@ -42,7 +42,7 @@ class OfflineAsrService {
 
   Future<Directory> _modelDirectory() async {
     final support = await getApplicationSupportDirectory();
-    final dir = Directory(p.join(support.path, 'offline_asr', 'moonshine_tiny_en'));
+    final dir = Directory(p.join(support.path, 'offline_asr', 'moonshine_base_en'));
     if (!await dir.exists()) {
       await dir.create(recursive: true);
     }
@@ -138,15 +138,18 @@ class OfflineAsrService {
     unawaited(_recorder.cancel().then((_) {}, onError: (_) {}));
   }
 
-  Future<void>? _recognizerFuture;
+  /// 卸下听写模型，避免和音素模型同时占着内存。
+  void release() {
+    final recognizer = _recognizer;
+    _recognizer = null;
+    _recognizerFuture = null;
+    recognizer?.free();
+  }
 
-  /// 只加载模型，不打开麦克风。可在播放标准音时调用，避免播完后还要等模型。
-  Future<void> warmUp() => _ensureRecognizer();
-
-  Future<String?> captureAndTranscribe({
+  /// 录一段话并返回 16k 采样。空数组表示没听清，null 表示已取消。
+  Future<Float32List?> captureUtterance({
     required bool Function() isCancelled,
     void Function()? onListening,
-    void Function(String text)? onPartial,
   }) async {
     final generation = ++_captureGeneration;
     final permitted = await _recorder.hasPermission();
@@ -154,9 +157,6 @@ class OfflineAsrService {
     if (!permitted) {
       throw const OfflineAsrException('没有麦克风权限');
     }
-
-    await _ensureRecognizer();
-    if (generation != _captureGeneration || isCancelled()) return null;
 
     final stream = await _recorder.startStream(
       const RecordConfig(
@@ -179,7 +179,6 @@ class OfflineAsrService {
     var speechSamples = 0;
     var trailingSilence = 0;
     var heardSpeech = false;
-    const sampleRate = 16000;
     const speechRms = 0.008;
     const minSpeechSamples = 16000 * 250 ~/ 1000;
     const silenceSamples = 16000 * 700 ~/ 1000;
@@ -210,7 +209,9 @@ class OfflineAsrService {
         }
 
         final speechLongEnough = speechSamples >= minSpeechSamples;
-        final endedBySilence = heardSpeech && speechLongEnough && trailingSilence >= silenceSamples;
+        final endedBySilence = heardSpeech &&
+            speechLongEnough &&
+            trailingSilence >= silenceSamples;
         final endedByLength = totalSamples >= maxSamples;
         final endedByNoSpeech = !heardSpeech && totalSamples >= noSpeechSamples;
         if (endedBySilence || endedByLength || endedByNoSpeech) {
@@ -226,11 +227,30 @@ class OfflineAsrService {
 
     if (generation != _captureGeneration || isCancelled()) return null;
     if (!heardSpeech || speechSamples < minSpeechSamples) {
-      return '';
+      return Float32List(0);
     }
+    return _pcm16ToFloat(pcm.toBytes());
+  }
 
-    final samples = _pcm16ToFloat(pcm.toBytes());
-    final text = _transcribe(samples, sampleRate);
+  Future<void>? _recognizerFuture;
+
+  /// 只加载模型，不打开麦克风。可在播放标准音时调用，避免播完后还要等模型。
+  Future<void> warmUp() => _ensureRecognizer();
+
+  Future<String?> captureAndTranscribe({
+    required bool Function() isCancelled,
+    void Function()? onListening,
+    void Function(String text)? onPartial,
+  }) async {
+    await _ensureRecognizer();
+    if (isCancelled()) return null;
+    final samples = await captureUtterance(
+      isCancelled: isCancelled,
+      onListening: onListening,
+    );
+    if (samples == null) return null;
+    if (samples.isEmpty) return '';
+    final text = _transcribe(samples, 16000);
     if (text.isNotEmpty) onPartial?.call(text);
     return text;
   }

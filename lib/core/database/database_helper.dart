@@ -28,7 +28,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 7,
+      version: 8,
       onCreate: _createDB,
       onUpgrade: _onUpgrade,
       onOpen: _onOpen,
@@ -130,6 +130,25 @@ class DatabaseHelper {
         "TEXT NOT NULL DEFAULT 'a01'",
       );
     }
+
+    if (oldVersion < 8) {
+      debugPrint("Migrating DB to version 8 (textbook and dictionary phonetics)...");
+      await _safeAddColumn(
+        db,
+        'words',
+        'phonetic_textbook',
+        "TEXT NOT NULL DEFAULT ''",
+      );
+      await _safeAddColumn(
+        db,
+        'words',
+        'phonetic_dictionary',
+        "TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "UPDATE words SET phonetic_dictionary = phonetic WHERE phonetic_dictionary = ''",
+      );
+    }
   }
 
   // 安全添加字段的辅助方法
@@ -155,6 +174,8 @@ class DatabaseHelper {
         text TEXT NOT NULL,
         meaning TEXT NOT NULL,
         phonetic TEXT NOT NULL,
+        phonetic_textbook TEXT NOT NULL DEFAULT '',
+        phonetic_dictionary TEXT NOT NULL DEFAULT '',
         pos TEXT NOT NULL DEFAULT '',
         grade INTEGER NOT NULL,
         semester INTEGER NOT NULL,
@@ -695,7 +716,11 @@ class DatabaseHelper {
       id: id,
       text: text,
       meaning: (data['meaning'] ?? '[释义]').toString(),
-      phonetic: (data['phonetic'] ?? '').toString(),
+      phonetic: (data['phonetic'] ?? '').toString().isNotEmpty
+          ? (data['phonetic'] ?? '').toString()
+          : (data['phonetic_textbook'] ?? '').toString(),
+      phoneticTextbook: (data['phonetic_textbook'] ?? '').toString(),
+      phoneticDictionary: (data['phonetic_dictionary'] ?? data['phonetic'] ?? '').toString(),
       pos: (data['pos'] ?? '').toString(),
       grade: grade,
       semester: semester,
@@ -891,7 +916,12 @@ class DatabaseHelper {
     // 必须使用明确的 插入或更新 语法
 
     final meaning = (data['meaning'] ?? '[释义]').toString();
-    final phonetic = (data['phonetic'] ?? '').toString();
+    final textbook = (data['phonetic_textbook'] ?? '').toString();
+    final dictionary = (data['phonetic_dictionary'] ?? data['phonetic'] ?? '').toString();
+    final original = (data['phonetic'] ?? '').toString();
+    final phonetic = original.isNotEmpty
+        ? original
+        : (textbook.isNotEmpty ? textbook : dictionary);
     // 音节等字段处理
     String syllablesJson = '[]';
     if (data['syllables'] != null && data['syllables'] is List) {
@@ -906,12 +936,14 @@ class DatabaseHelper {
     final pos = (data['pos'] ?? '').toString();
     batch.rawInsert(
       '''
-       INSERT INTO words (id, text, meaning, phonetic, pos, grade, semester, unit, difficulty, category, book_id, order_index, syllables)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+       INSERT INTO words (id, text, meaning, phonetic, phonetic_textbook, phonetic_dictionary, pos, grade, semester, unit, difficulty, category, book_id, order_index, syllables)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(id) DO UPDATE SET
          text = excluded.text,
          meaning = excluded.meaning,
          phonetic = excluded.phonetic,
+         phonetic_textbook = excluded.phonetic_textbook,
+         phonetic_dictionary = excluded.phonetic_dictionary,
          pos = excluded.pos,
          order_index = excluded.order_index,
          syllables = excluded.syllables,
@@ -922,6 +954,8 @@ class DatabaseHelper {
         text,
         meaning,
         phonetic,
+        textbook,
+        dictionary,
         pos,
         grade,
         semester,

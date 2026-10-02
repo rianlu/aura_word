@@ -18,6 +18,7 @@ class SpeechPracticeSettingsSection extends StatefulWidget {
 class _SpeechPracticeSettingsSectionState extends State<SpeechPracticeSettingsSection> {
   SpeechRecognizerMode _mode = SpeechRecognizerMode.auto;
   PronunciationStrictness _strictness = PronunciationStrictness.loose;
+  bool _useTextbookPhonetic = true;
   bool _installed = false;
   bool _loading = true;
 
@@ -35,6 +36,7 @@ class _SpeechPracticeSettingsSectionState extends State<SpeechPracticeSettingsSe
     setState(() {
       _mode = mode;
       _strictness = strictness;
+      _useTextbookPhonetic = PhoneticSourceSettings.useTextbook;
       _installed = installed;
       _loading = false;
     });
@@ -64,7 +66,7 @@ class _SpeechPracticeSettingsSectionState extends State<SpeechPracticeSettingsSe
         options: const [
           _Option('自动', '先用手机自带，用不了再提示下载离线识别', SpeechRecognizerMode.auto),
           _Option('手机自带', '只用系统语音识别', SpeechRecognizerMode.system),
-          _Option('离线识别', '使用本机英语模型，约 30MB', SpeechRecognizerMode.offline),
+          _Option('离线识别', '英语听写模型，约 140MB，用来听你读出的内容', SpeechRecognizerMode.offline),
         ],
         selected: _mode,
       ),
@@ -99,6 +101,25 @@ class _SpeechPracticeSettingsSectionState extends State<SpeechPracticeSettingsSe
     setState(() => _strictness = selected);
   }
 
+  Future<void> _pickPhoneticSource() async {
+    final selected = await showModalBottomSheet<bool>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => _OptionSheet(
+        title: '音标显示',
+        options: const [
+          _Option('课本音标', '和外研教材词汇表一致', true),
+          _Option('词典音标', '更接近其他背单词应用的注音', false),
+        ],
+        selected: _useTextbookPhonetic,
+      ),
+    );
+    if (selected == null || !mounted) return;
+    await PhoneticSourceSettings.instance.setUseTextbook(selected);
+    if (!mounted) return;
+    setState(() => _useTextbookPhonetic = selected);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_loading) {
@@ -121,8 +142,16 @@ class _SpeechPracticeSettingsSectionState extends State<SpeechPracticeSettingsSe
           icon: Icons.graphic_eq_rounded,
           iconColor: const Color(0xFF7C3AED),
           title: '发音评分',
-          subtitle: '按教材音标对齐 · $_strictnessLabel',
+          subtitle: _strictnessLabel,
           onTap: _pickStrictness,
+        ),
+        const SizedBox(height: 16),
+        _menuItem(
+          icon: Icons.translate_rounded,
+          iconColor: const Color(0xFF0F766E),
+          title: '音标显示',
+          subtitle: _useTextbookPhonetic ? '课本音标' : '词典音标',
+          onTap: _pickPhoneticSource,
         ),
       ],
     );

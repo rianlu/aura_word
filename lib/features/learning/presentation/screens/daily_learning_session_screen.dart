@@ -134,11 +134,14 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
          setState(() => _transitionCountdown--);
        } else {
          timer.cancel();
-         setState(() {
-           _isTransitioning = false;
-           _pendingNextPhase = null;
-         });
          _advancePhase(nextPhase);
+         WidgetsBinding.instance.addPostFrameCallback((_) {
+           if (!mounted) return;
+           setState(() {
+             _isTransitioning = false;
+             _pendingNextPhase = null;
+           });
+         });
        }
      });
   }
@@ -458,14 +461,9 @@ class _DailyLearningSessionScreenState extends State<DailyLearningSessionScreen>
 
   Widget _buildCurrentView() {
     final word = _sessionWords[_currentIndex];
-    final key = ValueKey("${_currentPhase}_${word.id}");
-
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      child: KeyedSubtree(
-        key: key,
-        child: _buildPhaseContent(word),
-      )
+    return KeyedSubtree(
+      key: ValueKey("${_currentPhase}_${word.id}"),
+      child: _buildPhaseContent(word),
     );
   }
 

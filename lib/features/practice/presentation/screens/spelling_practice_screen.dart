@@ -297,7 +297,7 @@ class _SpellingPracticeScreenState extends State<SpellingPracticeScreen> {
           const SizedBox(height: 16),
           Text(_currentWord!.meaning, style: GoogleFonts.plusJakartaSans(fontSize: 32, fontWeight: FontWeight.w900, color: AppColors.primary)),
           const SizedBox(height: 16),
-          Text(_currentWord!.phonetic, style: const TextStyle(fontSize: 18, color: AppColors.textMediumEmphasis, fontWeight: FontWeight.w500)),
+          Text(_currentWord!.displayPhonetic, style: const TextStyle(fontSize: 18, color: AppColors.textMediumEmphasis, fontWeight: FontWeight.w500)),
         ],
       ),
     );

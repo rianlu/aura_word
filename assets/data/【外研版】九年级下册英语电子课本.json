@@ -13,7 +13,9 @@
             "en": "Can you direct me to the nearest bookstore, please?",
             "cn": "请问你能告诉我最近的书店怎么走吗？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[dɪˈrekt]",
+        "phonetic_textbook": "/dɪ'rekt,daɪ'rekt/"
       },
       {
         "text": "pilot",
@@ -24,7 +26,9 @@
             "en": "My dream is to become a pilot and fly a big airplane.",
             "cn": "我的梦想是成为一名飞行员，驾驶大飞机。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈpaɪlət]",
+        "phonetic_textbook": "/'paɪlət/"
       },
       {
         "text": "succeed",
@@ -39,7 +43,9 @@
             "en": "If you work hard, you will succeed in achieving your dreams.",
             "cn": "如果你努力，你就会成功实现梦想。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[səkˈsi:d]",
+        "phonetic_textbook": "/sək'siːd/"
       },
       {
         "text": "flight",
@@ -50,7 +56,9 @@
             "en": "Our flight to Beijing will take off at three o'clock this afternoon.",
             "cn": "我们飞往北京的航班将在今天下午三点起飞。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[flaɪt]",
+        "phonetic_textbook": "/flaɪt/"
       },
       {
         "text": "because of",
@@ -61,7 +69,9 @@
             "en": "The football match was cancelled because of the heavy rain.",
             "cn": "足球赛因为大雨被取消了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[bɪˈkɒz ɒv]",
+        "phonetic_textbook": ""
       },
       {
         "text": "exactly",
@@ -72,7 +82,9 @@
             "en": "What exactly do you want to do this weekend?",
             "cn": "你这个周末到底想做什么？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪɡˈzæktlɪ]",
+        "phonetic_textbook": "/ɪg'zæktli/"
       },
       {
         "text": "take care",
@@ -83,7 +95,9 @@
             "en": "Please take care of your little sister when mom is out.",
             "cn": "妈妈不在家的时候请照顾好你的妹妹。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[teɪk keə]",
+        "phonetic_textbook": ""
       },
       {
         "text": "sir",
@@ -94,7 +108,9 @@
             "en": "Excuse me, sir, you dropped your wallet on the floor.",
             "cn": "先生，打扰一下，您的钱包掉在地上了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[sɜ:]",
+        "phonetic_textbook": "/sə,sɜː/"
       },
       {
         "text": "officer",
@@ -105,7 +121,9 @@
             "en": "The police officer helped us find the way to the museum.",
             "cn": "那位警察帮助我们找到了去博物馆的路。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈɒfɪsə]",
+        "phonetic_textbook": "/'ɒfɪsə/"
       },
       {
         "text": "stupid",
@@ -116,7 +134,9 @@
             "en": "It is stupid to go out without a coat on such a cold day.",
             "cn": "这么冷的天不穿外套就出去是很愚蠢的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈstju:pɪd]",
+        "phonetic_textbook": "/'stjuːpɪd/"
       },
       {
         "text": "take off",
@@ -127,7 +147,9 @@
             "en": "Please fasten your seat belt before the plane takes off.",
             "cn": "请在飞机起飞前系好安全带。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[teɪk ɒf]",
+        "phonetic_textbook": ""
       },
       {
         "text": "jacket",
@@ -146,7 +168,9 @@
             "en": "He put on his jacket and went out to play with his friends.",
             "cn": "他穿上夹克，然后出去和朋友玩了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈdʒækɪt]",
+        "phonetic_textbook": "/'dʒækɪt/"
       }
     ]
   },
@@ -168,7 +192,9 @@
             "en": "This blue bike is ours, and that red one belongs to Tom.",
             "cn": "这辆蓝色的自行车是我们的，那辆红色的是汤姆的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈaʊəz]",
+        "phonetic_textbook": "/aʊəz/"
       },
       {
         "text": "tie",
@@ -179,7 +205,9 @@
             "en": "My father wears a tie to work every day.",
             "cn": "我爸爸每天系着领带去上班。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[taɪ]",
+        "phonetic_textbook": "/taɪ/"
       },
       {
         "text": "row",
@@ -194,7 +222,9 @@
             "en": "We sat in the front row to watch the school play.",
             "cn": "我们坐在前排观看学校话剧。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rəʊ]",
+        "phonetic_textbook": "/rəʊ/"
       },
       {
         "text": "pool",
@@ -209,7 +239,9 @@
             "en": "Children are not allowed to swim in the pool without adults.",
             "cn": "没有大人陪同，孩子们不允许在游泳池里游泳。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[pu:l]",
+        "phonetic_textbook": "/puːl/"
       },
       {
         "text": "pass",
@@ -228,7 +260,9 @@
             "en": "I hope to pass all my exams at the end of this term.",
             "cn": "我希望在这学期末通过我所有的考试。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[pɑ:s]",
+        "phonetic_textbook": "/pɑːs/"
       },
       {
         "text": "secondary",
@@ -239,7 +273,9 @@
             "en": "Playing games is secondary; studying is your main job now.",
             "cn": "玩游戏是次要的；学习是你现在的主要任务。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈsekəndrɪ]",
+        "phonetic_textbook": "/'sekəndəri/"
       },
       {
         "text": "secondary school",
@@ -250,7 +286,9 @@
             "en": "My brother will go to secondary school next September.",
             "cn": "我哥哥明年九月将要去上中学。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈsekəndrɪ sku:l]",
+        "phonetic_textbook": ""
       },
       {
         "text": "absent",
@@ -265,7 +303,9 @@
             "en": "She was absent from school yesterday because she had a fever.",
             "cn": "她昨天因为发烧没来上学。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈæbsənt]",
+        "phonetic_textbook": "/'æbsənt/"
       },
       {
         "text": "bell",
@@ -276,7 +316,9 @@
             "en": "The bell rings at eight o'clock, and our class begins.",
             "cn": "铃声在八点响起，我们的课就开始了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[bel]",
+        "phonetic_textbook": "/bel/"
       }
     ]
   },
@@ -294,7 +336,9 @@
             "en": "The wealthy man donated a lot of money to build a new library.",
             "cn": "那个富人捐了很多钱来建一座新图书馆。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈwelθɪ]",
+        "phonetic_textbook": "/'welθi/"
       },
       {
         "text": "fear",
@@ -309,7 +353,9 @@
             "en": "Some children have a fear of speaking in front of the class.",
             "cn": "有些孩子害怕在全班面前讲话。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[fɪə]",
+        "phonetic_textbook": "/fɪə/"
       },
       {
         "text": "used to",
@@ -320,7 +366,9 @@
             "en": "I used to play basketball after school, but now I prefer swimming.",
             "cn": "我过去常常放学后打篮球，但现在我更喜欢游泳。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈju:st tu]",
+        "phonetic_textbook": "/'juːsttuː/"
       },
       {
         "text": "wealth",
@@ -331,12 +379,14 @@
             "en": "Health is more important than wealth for most people.",
             "cn": "对大多数人来说，健康比财富更重要。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[welθ]",
+        "phonetic_textbook": "/welθ/"
       },
       {
         "text": "double",
         "phonetic": "[ˈdʌbl]",
-        "meaning": "n. 两倍、[计] 双精度型adj.两倍的、双重的vt.使加倍vi.加倍",
+        "meaning": "adj. 两倍的；双的",
         "app_sentences": [
           {
             "en": "This math problem is double the difficulty of the last one.",
@@ -346,7 +396,9 @@
             "en": "We need a double room for my parents when they visit us.",
             "cn": "我父母来看我们时我们需要一个双人间。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈdʌbl]",
+        "phonetic_textbook": "/'dʌbl/"
       },
       {
         "text": "seldom",
@@ -361,7 +413,9 @@
             "en": "He is very busy and seldom has time to watch TV.",
             "cn": "他非常忙，很少有时间看电视。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈseldəm]",
+        "phonetic_textbook": "/'seldəm/"
       },
       {
         "text": "spare",
@@ -372,7 +426,9 @@
             "en": "I always carry a spare pen in my school bag.",
             "cn": "我总是在书包里带一支备用钢笔。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[speə]",
+        "phonetic_textbook": "/speə/"
       },
       {
         "text": "spare time",
@@ -383,7 +439,9 @@
             "en": "I often read books in my spare time at the weekend.",
             "cn": "我经常在周末的业余时间看书。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[speə taɪm]",
+        "phonetic_textbook": ""
       },
       {
         "text": "speak up",
@@ -394,7 +452,9 @@
             "en": "Please speak up; I can't hear you clearly at the back.",
             "cn": "请大声点说；我在后面听不清你讲话。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[spi:k ʌp]",
+        "phonetic_textbook": ""
       },
       {
         "text": "deaf",
@@ -409,7 +469,9 @@
             "en": "The kind teacher uses sign language to teach the deaf students.",
             "cn": "那位善良的老师用手语来教失聪的学生。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[def]",
+        "phonetic_textbook": "/def/"
       },
       {
         "text": "tiny",
@@ -420,7 +482,9 @@
             "en": "There is a tiny insect on the leaf of this flower.",
             "cn": "这朵花的叶子上有一只很小的昆虫。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈtaɪnɪ]",
+        "phonetic_textbook": "/'taɪni/"
       },
       {
         "text": "electric",
@@ -435,7 +499,9 @@
             "en": "My father bought a new electric fan for the living room.",
             "cn": "我爸爸为客厅买了一个新的电风扇。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪˈlektrɪk]",
+        "phonetic_textbook": "/ɪ'lektrɪk/"
       },
       {
         "text": "light",
@@ -446,7 +512,9 @@
             "en": "Please turn off the light when you leave the classroom.",
             "cn": "离开教室时请关灯。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[laɪt]",
+        "phonetic_textbook": "/laɪt/"
       },
       {
         "text": "candle",
@@ -457,7 +525,9 @@
             "en": "We lit a candle when the electricity suddenly went out.",
             "cn": "当电突然停了的时候，我们点了一支蜡烛。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈkændl]",
+        "phonetic_textbook": "/'kændl/"
       },
       {
         "text": "postman",
@@ -472,7 +542,9 @@
             "en": "The postman delivers letters and packages to our house every day.",
             "cn": "邮递员每天把信件和包裹送到我们家。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈpəʊstmən]",
+        "phonetic_textbook": "/'pəʊstmən/"
       },
       {
         "text": "cold",
@@ -491,7 +563,9 @@
             "en": "It is very cold outside, so remember to wear your coat.",
             "cn": "外面很冷，所以记得穿上你的外套。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[kəʊld]",
+        "phonetic_textbook": "/kəʊld/"
       },
       {
         "text": "heat",
@@ -506,7 +580,9 @@
             "en": "The heat from the sun makes us feel warm in summer.",
             "cn": "夏天，太阳的热量让我们感到温暖。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hi:t]",
+        "phonetic_textbook": "/hiːt/"
       },
       {
         "text": "full-time",
@@ -517,7 +593,9 @@
             "en": "Her mother has a full-time job at a local hospital.",
             "cn": "她妈妈在当地医院有一份全职工作。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˌfulˈtaɪm]",
+        "phonetic_textbook": "/'fʊl,taɪm/"
       },
       {
         "text": "afford",
@@ -528,7 +606,9 @@
             "en": "I saved my pocket money to afford this new dictionary.",
             "cn": "我省下零花钱才买得起这本新词典。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[əˈfɔ:d]",
+        "phonetic_textbook": "/ə'fɔːd/"
       },
       {
         "text": "role",
@@ -539,7 +619,9 @@
             "en": "He played the role of a brave knight in the school play.",
             "cn": "他在学校话剧里扮演了一个勇敢的骑士。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rəʊl]",
+        "phonetic_textbook": "/rəʊl/"
       },
       {
         "text": "education",
@@ -550,7 +632,9 @@
             "en": "A good education is very important for our future.",
             "cn": "良好的教育对我们的未来非常重要。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˌedʒuˈkeɪʃn]",
+        "phonetic_textbook": "/,edjʊ'keɪʃn/"
       },
       {
         "text": "transport",
@@ -561,7 +645,9 @@
             "en": "Many students use bicycles as their main transport to school.",
             "cn": "许多学生把自行车作为他们上学的主要交通工具。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈtrænspɔ:t]",
+        "phonetic_textbook": "/'trænspɔːt/"
       }
     ]
   },
@@ -579,7 +665,9 @@
             "en": "We will set off for the park at seven tomorrow morning.",
             "cn": "我们明天早上七点出发去公园。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[set ɒf]",
+        "phonetic_textbook": ""
       },
       {
         "text": "sock",
@@ -590,7 +678,9 @@
             "en": "I need to find a pair of clean socks for P.E. class.",
             "cn": "我需要找一双干净的袜子上体育课。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[sɒk]",
+        "phonetic_textbook": "/sɒk/"
       },
       {
         "text": "whenever",
@@ -601,7 +691,9 @@
             "en": "You can call me whenever you need help with your homework.",
             "cn": "无论何时你需要作业帮助，你都可以打电话给我。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[wenˈevə]",
+        "phonetic_textbook": "/wen'evə/"
       },
       {
         "text": "proper",
@@ -612,7 +704,9 @@
             "en": "Wearing proper clothes is necessary for the school trip.",
             "cn": "为这次学校旅行，穿合适的衣服是必要的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈprɒpə]",
+        "phonetic_textbook": "/'prɒpə/"
       },
       {
         "text": "edge",
@@ -623,7 +717,9 @@
             "en": "Be careful not to stand too close to the edge of the pool.",
             "cn": "小心不要站得离游泳池边太近。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[edʒ]",
+        "phonetic_textbook": "/edʒ/"
       },
       {
         "text": "yourself",
@@ -638,7 +734,9 @@
             "en": "You should learn to finish your homework by yourself.",
             "cn": "你应该学会自己完成作业。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[jɔ:ˈself]",
+        "phonetic_textbook": "/jə'self/"
       },
       {
         "text": "go off",
@@ -649,7 +747,9 @@
             "en": "The alarm clock will go off at six thirty tomorrow morning.",
             "cn": "闹钟会在明天早上六点半响起。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɡəʊ ɒf]",
+        "phonetic_textbook": ""
       },
       {
         "text": "starve",
@@ -660,7 +760,9 @@
             "en": "I'm starving; let's have lunch as soon as possible.",
             "cn": "我快饿死了；我们尽快吃午饭吧。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[stɑ:v]",
+        "phonetic_textbook": "/stɑːv/"
       },
       {
         "text": "go",
@@ -671,7 +773,9 @@
             "en": "We usually go to the library to study on Saturday afternoons.",
             "cn": "我们通常在周六下午去图书馆学习。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[gəʊ]",
+        "phonetic_textbook": "/gəʊ/"
       },
       {
         "text": "in one go",
@@ -682,7 +786,9 @@
             "en": "He finished reading the short story in one go.",
             "cn": "他一口气读完了那个短篇故事。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪn wʌn gəʊ]",
+        "phonetic_textbook": ""
       },
       {
         "text": "rock",
@@ -693,7 +799,9 @@
             "en": "Children should not throw rocks at animals or people.",
             "cn": "孩子们不应该向动物或人扔石头。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rɒk]",
+        "phonetic_textbook": "/rɒk/"
       },
       {
         "text": "rock climbing",
@@ -704,7 +812,9 @@
             "en": "Rock climbing is an exciting but dangerous outdoor activity.",
             "cn": "攀岩是一项刺激但危险的户外活动。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rɒk ˈklaɪmɪŋ]",
+        "phonetic_textbook": ""
       },
       {
         "text": "stone",
@@ -719,7 +829,9 @@
             "en": "There is a small stone bridge over the river near our village.",
             "cn": "我们村附近的河上有一座小石桥。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[stəʊn]",
+        "phonetic_textbook": "/stəʊn/"
       },
       {
         "text": "fairly",
@@ -730,7 +842,9 @@
             "en": "She is fairly good at drawing pictures of animals.",
             "cn": "她画动物画得相当好。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈfeəlɪ]",
+        "phonetic_textbook": "/'feəli/"
       },
       {
         "text": "smooth",
@@ -741,7 +855,9 @@
             "en": "The surface of the new desk is very smooth and clean.",
             "cn": "这张新桌子的表面非常光滑干净。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[smu:ð]",
+        "phonetic_textbook": "/smuːð/"
       },
       {
         "text": "straight",
@@ -756,7 +872,9 @@
             "en": "Go straight down this road and you will see the library on your left.",
             "cn": "沿着这条路直走，你会看到左边的图书馆。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[streɪt]",
+        "phonetic_textbook": "/streɪt/"
       },
       {
         "text": "tent",
@@ -767,7 +885,9 @@
             "en": "We slept in a tent during our camping trip last summer.",
             "cn": "去年夏天露营时，我们睡在帐篷里。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[tent]",
+        "phonetic_textbook": "/tent/"
       },
       {
         "text": "fall",
@@ -782,7 +902,9 @@
             "en": "Leaves turn yellow and fall from the trees in autumn.",
             "cn": "秋天，树叶变黄并从树上落下。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[fɔ:l]",
+        "phonetic_textbook": "/fɔːl/"
       },
       {
         "text": "fall asleep",
@@ -793,7 +915,9 @@
             "en": "He was so tired that he fell asleep during the movie.",
             "cn": "他太累了，以至于在看电影时睡着了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[fɔ:l əˈsli:p]",
+        "phonetic_textbook": ""
       },
       {
         "text": "hang",
@@ -808,7 +932,9 @@
             "en": "Please hang your coat on the hook behind the door.",
             "cn": "请把你的外套挂在门后的钩子上。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hæŋ]",
+        "phonetic_textbook": "/hæŋ/"
       },
       {
         "text": "sudden",
@@ -819,7 +945,9 @@
             "en": "A sudden noise from outside made the little girl very scared.",
             "cn": "外面突然的响声让小女孩非常害怕。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈsʌdn]",
+        "phonetic_textbook": "/'sʌdn/"
       },
       {
         "text": "gun",
@@ -830,7 +958,9 @@
             "en": "Police officers sometimes carry a gun to protect people.",
             "cn": "警察有时会携带枪支来保护人们。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɡʌn]",
+        "phonetic_textbook": "/gʌn/"
       },
       {
         "text": "soft",
@@ -845,7 +975,9 @@
             "en": "The new pillow is very soft and comfortable to sleep on.",
             "cn": "新枕头非常柔软，睡在上面很舒服。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[sɒft]",
+        "phonetic_textbook": "/sɒft/"
       },
       {
         "text": "still",
@@ -860,7 +992,9 @@
             "en": "Please sit still while the teacher is talking.",
             "cn": "老师讲话时请安静地坐着别动。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[stɪl]",
+        "phonetic_textbook": "/stɪl/"
       },
       {
         "text": "wood",
@@ -875,7 +1009,9 @@
             "en": "This old table is made of strong and beautiful wood.",
             "cn": "这张旧桌子是用坚固而美丽的木头制成的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[wud]",
+        "phonetic_textbook": "/wʊd/"
       },
       {
         "text": "blood",
@@ -886,7 +1022,9 @@
             "en": "The nurse took a little blood from his finger for the test.",
             "cn": "护士从他的手指上取了一点血做化验。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[blʌd]",
+        "phonetic_textbook": "/blʌd/"
       }
     ]
   },
@@ -904,7 +1042,9 @@
             "en": "I need to study hard to catch up with my classmates in math.",
             "cn": "我需要努力学习，在数学上赶上我的同学们。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[kætʃ ʌp]",
+        "phonetic_textbook": ""
       },
       {
         "text": "agreement",
@@ -919,7 +1059,9 @@
             "en": "After discussion, we finally came to an agreement on the plan.",
             "cn": "讨论之后，我们终于就计划达成了一致。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[əˈɡri:mənt]",
+        "phonetic_textbook": "/ə'griːmənt/"
       },
       {
         "text": "blind",
@@ -934,7 +1076,9 @@
             "en": "The kind man has a blind dog that helps him cross the street.",
             "cn": "这位善良的男子有一只导盲犬帮他过马路。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[blaɪnd]",
+        "phonetic_textbook": "/blaɪnd/"
       },
       {
         "text": "ouch",
@@ -945,7 +1089,9 @@
             "en": "Ouch! I hit my knee on the corner of the desk.",
             "cn": "哎哟！我的膝盖撞到桌角了。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[aʊtʃ]",
+        "phonetic_textbook": "/aʊtʃ/"
       },
       {
         "text": "call off",
@@ -956,7 +1102,9 @@
             "en": "They had to call off the picnic because of the bad weather.",
             "cn": "因为天气不好，他们不得不取消了野餐。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[kɔ:l ɒf]",
+        "phonetic_textbook": ""
       },
       {
         "text": "thanks to",
@@ -967,7 +1115,9 @@
             "en": "Thanks to your help, I finished my project on time.",
             "cn": "多亏了你的帮助，我按时完成了我的项目。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[θæŋks tu]",
+        "phonetic_textbook": ""
       },
       {
         "text": "health care",
@@ -978,7 +1128,9 @@
             "en": "Good health care is important for everyone, especially the old.",
             "cn": "良好的医疗保健对每个人都很重要，尤其是老人。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[helθ keə]",
+        "phonetic_textbook": ""
       },
       {
         "text": "expect",
@@ -997,7 +1149,9 @@
             "en": "I expect to get a letter from my pen pal next week.",
             "cn": "我期待下周能收到笔友的来信。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪkˈspekt]",
+        "phonetic_textbook": "/ɪk'spekt/"
       },
       {
         "text": "require",
@@ -1008,7 +1162,9 @@
             "en": "This job requires you to work for eight hours a day.",
             "cn": "这份工作要求你每天工作八小时。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rɪˈkwaɪə]",
+        "phonetic_textbook": "/rɪ'kwaɪə/"
       },
       {
         "text": "physical",
@@ -1019,7 +1175,9 @@
             "en": "Physical exercise is good for both our body and mind.",
             "cn": "体育锻炼对我们的身体和头脑都有好处。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈfɪzɪkəl]",
+        "phonetic_textbook": "/'fɪzɪkl/"
       },
       {
         "text": "effort",
@@ -1030,7 +1188,9 @@
             "en": "With great effort, he finally solved the difficult problem.",
             "cn": "通过巨大的努力，他终于解决了那个难题。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈefət]",
+        "phonetic_textbook": "/'efət/"
       },
       {
         "text": "once in a while",
@@ -1041,7 +1201,9 @@
             "en": "Once in a while, our family goes to the cinema on weekends.",
             "cn": "偶尔，我们家会在周末去电影院。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[wʌns ɪn ə waɪl]",
+        "phonetic_textbook": ""
       },
       {
         "text": "harm",
@@ -1052,7 +1214,9 @@
             "en": "Smoking will harm your health, so please don't try it.",
             "cn": "吸烟会损害你的健康，所以请不要尝试。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hɑ:m]",
+        "phonetic_textbook": "/hɑːm/"
       }
     ]
   },
@@ -1070,7 +1234,9 @@
             "en": "I received an invitation to Lucy's birthday party yesterday.",
             "cn": "昨天我收到了露西生日派对的邀请。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˌɪnvɪˈteɪʃən]",
+        "phonetic_textbook": "/,ɪnvɪ'teɪʃn/"
       },
       {
         "text": "invite",
@@ -1085,7 +1251,9 @@
             "en": "My best friend invited me to her house for dinner last Sunday.",
             "cn": "上周日，我最好的朋友邀请我去她家吃晚饭。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪnˈvaɪt]",
+        "phonetic_textbook": "/ɪn'vaɪt/"
       },
       {
         "text": "calendar",
@@ -1096,7 +1264,9 @@
             "en": "There is a beautiful picture on the wall calendar in my room.",
             "cn": "我房间的挂历上有一幅漂亮的图片。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈkælɪndə]",
+        "phonetic_textbook": "/'kælɪndə/"
       },
       {
         "text": "balloon",
@@ -1111,7 +1281,9 @@
             "en": "The children were playing with colourful balloons at the party.",
             "cn": "孩子们在派对上玩着五颜六色的气球。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[bəˈlu:n]",
+        "phonetic_textbook": "/bə'luːn/"
       },
       {
         "text": "paint",
@@ -1126,7 +1298,9 @@
             "en": "We will paint the wall blue to match the new furniture.",
             "cn": "我们要把墙刷成蓝色来配新家具。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[peɪnt]",
+        "phonetic_textbook": "/peɪnt/"
       },
       {
         "text": "heat",
@@ -1141,7 +1315,9 @@
             "en": "The heat from the sun makes us feel warm in summer.",
             "cn": "夏天，太阳的热量让我们感到温暖。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hi:t]",
+        "phonetic_textbook": "/hiːt/"
       },
       {
         "text": "heat up",
@@ -1152,7 +1328,9 @@
             "en": "You can heat up the soup in the microwave for two minutes.",
             "cn": "你可以用微波炉把汤加热两分钟。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hi:t ʌp]",
+        "phonetic_textbook": ""
       },
       {
         "text": "knife",
@@ -1171,7 +1349,9 @@
             "en": "Please be careful when you use a knife to cut the bread.",
             "cn": "当你用刀切面包时请小心。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[naɪf]",
+        "phonetic_textbook": "/naɪf/"
       },
       {
         "text": "fork",
@@ -1182,7 +1362,9 @@
             "en": "In Western countries, people usually eat with a knife and fork.",
             "cn": "在西方国家，人们通常用刀叉吃饭。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[fɔ:k]",
+        "phonetic_textbook": "/fɔːk/"
       },
       {
         "text": "spoon",
@@ -1193,7 +1375,9 @@
             "en": "She uses a spoon to eat soup and a fork to eat salad.",
             "cn": "她用勺子喝汤，用叉子吃沙拉。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[spu:n]",
+        "phonetic_textbook": "/spuːn/"
       },
       {
         "text": "cheeseburger",
@@ -1204,7 +1388,9 @@
             "en": "I often order a cheeseburger and a cup of milk for lunch.",
             "cn": "我午餐经常点一个芝士汉堡和一杯牛奶。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈtʃi:zbɜ:ɡə]",
+        "phonetic_textbook": "/'tʃiːz,bɜːgə/"
       },
       {
         "text": "Italian",
@@ -1215,7 +1401,9 @@
             "en": "My father likes Italian food, especially pizza and pasta.",
             "cn": "我爸爸喜欢意大利食物，尤其是披萨和意大利面。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪˈtæljən]",
+        "phonetic_textbook": "/ɪ'tæljən/"
       },
       {
         "text": "Westerner",
@@ -1226,7 +1414,9 @@
             "en": "As a Westerner, he still enjoys learning Chinese history at school.",
             "cn": "作为一个西方人，他仍然喜欢在学校学习中国历史。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈwestənə]",
+        "phonetic_textbook": "/'westənə/"
       },
       {
         "text": "West",
@@ -1237,7 +1427,9 @@
             "en": "The sun sets in the West at the end of the day.",
             "cn": "太阳在一天结束时从西边落下。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[west]",
+        "phonetic_textbook": "/west/"
       },
       {
         "text": "serve",
@@ -1252,7 +1444,9 @@
             "en": "The waiter will serve drinks and food to the customers.",
             "cn": "服务员将为顾客端上饮料和食物。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[sɜ:v]",
+        "phonetic_textbook": "/sɜːv/"
       },
       {
         "text": "similar",
@@ -1267,7 +1461,9 @@
             "en": "Your new bicycle is similar to mine, but mine is blue.",
             "cn": "你的新自行车和我的相似，但我的那辆是蓝色的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈsɪmɪlə]",
+        "phonetic_textbook": "/'sɪmɪlə/"
       },
       {
         "text": "wing",
@@ -1278,7 +1474,9 @@
             "en": "The bird broke its wing and couldn't fly back to its nest.",
             "cn": "那只鸟的翅膀受伤了，无法飞回它的巢。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[wɪŋ]",
+        "phonetic_textbook": "/wɪŋ/"
       },
       {
         "text": "lady",
@@ -1289,7 +1487,9 @@
             "en": "The kind lady helped the lost boy find his parents.",
             "cn": "那位善良的女士帮助迷路的小男孩找到了他的父母。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈleɪdɪ]",
+        "phonetic_textbook": "/'leɪdi/"
       },
       {
         "text": "gentleman",
@@ -1300,7 +1500,9 @@
             "en": "He is a true gentleman who always holds the door for others.",
             "cn": "他是一位真正的绅士，总是为别人扶着门。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈdʒentlmən]",
+        "phonetic_textbook": "/'dʒentlmən/"
       },
       {
         "text": "help yourself",
@@ -1311,7 +1513,9 @@
             "en": "Please help yourself to some fruit on the table.",
             "cn": "请随便吃点桌子上的水果。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[help jɔ:ˈself]",
+        "phonetic_textbook": ""
       },
       {
         "text": "cross",
@@ -1322,7 +1526,9 @@
             "en": "Remember to look both ways before you cross the street.",
             "cn": "过马路前记得左右看看。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[krɒs]",
+        "phonetic_textbook": "/krɒs/"
       }
     ]
   },
@@ -1344,7 +1550,9 @@
             "en": "With enough practice, you can achieve your goal of swimming well.",
             "cn": "通过足够的练习，你可以达到游好泳的目标。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[əˈtʃi:v]",
+        "phonetic_textbook": "/ə'tʃiːv/"
       },
       {
         "text": "including",
@@ -1359,7 +1567,9 @@
             "en": "Ten students, including me, joined the reading club.",
             "cn": "包括我在内的十名学生加入了阅读俱乐部。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪnˈklu:dɪŋ]",
+        "phonetic_textbook": "/ɪn'kluːdɪŋ/"
       },
       {
         "text": "speaker",
@@ -1370,7 +1580,9 @@
             "en": "The guest speaker told us interesting stories about his travels.",
             "cn": "特邀演讲者给我们讲了他旅行的有趣故事。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈspi:kə]",
+        "phonetic_textbook": "/'spiːkə/"
       },
       {
         "text": "boss",
@@ -1381,7 +1593,9 @@
             "en": "Her boss is very strict but also fair to all the workers.",
             "cn": "她的老板非常严格，但对所有工人也很公平。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[bɒs]",
+        "phonetic_textbook": "/bɒs/"
       },
       {
         "text": "secretary",
@@ -1392,7 +1606,9 @@
             "en": "The school secretary answers phone calls and helps visitors.",
             "cn": "学校秘书接听电话并帮助来访者。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈsekrətrɪ]",
+        "phonetic_textbook": "/'sekrətri/"
       },
       {
         "text": "quarter",
@@ -1407,7 +1623,9 @@
             "en": "It's a quarter past seven; we have fifteen minutes before class.",
             "cn": "现在是七点一刻；我们离上课还有十五分钟。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈkwɔ:tə]",
+        "phonetic_textbook": "/'kwɔːtə/"
       },
       {
         "text": "industry",
@@ -1418,7 +1636,9 @@
             "en": "This city is famous for its car industry and technology.",
             "cn": "这座城市以其汽车工业和技术而闻名。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈɪndəstrɪ]",
+        "phonetic_textbook": "/'ɪndəstri/"
       },
       {
         "text": "zero",
@@ -1429,7 +1649,9 @@
             "en": "The temperature dropped to zero degrees last night.",
             "cn": "昨晚气温降到了零度。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈzɪərəʊ]",
+        "phonetic_textbook": "/'zɪərəʊ/"
       },
       {
         "text": "Indian",
@@ -1440,7 +1662,9 @@
             "en": "My neighbour is Indian, and she sometimes cooks delicious curry.",
             "cn": "我的邻居是印度人，她有时会做美味的咖喱。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈɪndɪən]",
+        "phonetic_textbook": "/'ɪndiən/"
       },
       {
         "text": "type",
@@ -1451,7 +1675,9 @@
             "en": "What type of music do you like to listen to, pop or rock?",
             "cn": "你喜欢听什么类型的音乐，流行乐还是摇滚乐？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈtaɪp]",
+        "phonetic_textbook": "/taɪp/"
       }
     ]
   },
@@ -1469,7 +1695,9 @@
             "en": "She put her keys and phone into her small handbag.",
             "cn": "她把钥匙和手机放进了她的小手提包里。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈhændbæɡ]",
+        "phonetic_textbook": "/'hænd,bæg/"
       },
       {
         "text": "beat",
@@ -1484,7 +1712,9 @@
             "en": "Our school basketball team beat their team in the final game.",
             "cn": "我们学校的篮球队在决赛中打败了他们队。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[bi:t]",
+        "phonetic_textbook": "/biːt/"
       },
       {
         "text": "pardon",
@@ -1495,7 +1725,9 @@
             "en": "Pardon? Could you please repeat the question more slowly?",
             "cn": "抱歉？你能请慢点重复一遍那个问题吗？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈpɑ:dn]",
+        "phonetic_textbook": "/'pɑːdn/"
       },
       {
         "text": "intend",
@@ -1506,7 +1738,9 @@
             "en": "I intend to visit my grandparents during the summer holiday.",
             "cn": "我打算暑假期间去看望我的祖父母。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɪnˈtend]",
+        "phonetic_textbook": "/ɪn'tend/"
       },
       {
         "text": "fetch",
@@ -1517,7 +1751,9 @@
             "en": "Could you please fetch me a glass of water from the kitchen?",
             "cn": "你能请从厨房给我拿一杯水来吗？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[fetʃ]",
+        "phonetic_textbook": "/fetʃ/"
       },
       {
         "text": "pancake",
@@ -1532,7 +1768,9 @@
             "en": "My mother makes delicious pancakes for us on Sunday mornings.",
             "cn": "我妈妈在星期天早上为我们做好吃的薄煎饼。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈpænkeɪk]",
+        "phonetic_textbook": "/'pæn,keɪk/"
       },
       {
         "text": "rose",
@@ -1547,7 +1785,9 @@
             "en": "He gave his mother a beautiful red rose on her birthday.",
             "cn": "他在母亲生日时送了她一朵美丽的红玫瑰。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[rəʊz]",
+        "phonetic_textbook": "/rəʊz/"
       },
       {
         "text": "laugh at",
@@ -1558,7 +1798,9 @@
             "en": "It's not polite to laugh at others when they make mistakes.",
             "cn": "当别人犯错时嘲笑他们是不礼貌的。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[lɑ:f æt]",
+        "phonetic_textbook": ""
       },
       {
         "text": "kindness",
@@ -1569,7 +1811,9 @@
             "en": "We should always show kindness to animals and people in need.",
             "cn": "我们应该永远对动物和有需要的人表现出善意。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈkaɪn(d)nəs]",
+        "phonetic_textbook": "/'kaɪndnəs/"
       },
       {
         "text": "give up",
@@ -1584,7 +1828,9 @@
             "en": "Don't give up easily when you face difficulties.",
             "cn": "当你面对困难时不要轻易放弃。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ɡɪv ʌp]",
+        "phonetic_textbook": ""
       },
       {
         "text": "try one's best",
@@ -1595,7 +1841,9 @@
             "en": "You should try your best to finish the task on time.",
             "cn": "你应该尽力按时完成任务。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[traɪ wʌnz best]",
+        "phonetic_textbook": ""
       },
       {
         "text": "disappointed",
@@ -1606,7 +1854,9 @@
             "en": "She was very disappointed because she failed the history test.",
             "cn": "她非常失望，因为她历史考试没及格。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˌdɪsəˈpɒɪntɪd]",
+        "phonetic_textbook": "/,dɪsə'pɔɪntɪd/"
       },
       {
         "text": "bedside",
@@ -1617,7 +1867,9 @@
             "en": "There is a lamp and a clock on my bedside table.",
             "cn": "我的床头柜上有一盏灯和一个闹钟。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[ˈbedsaɪd]",
+        "phonetic_textbook": "/'bedsaɪd/"
       },
       {
         "text": "note",
@@ -1636,7 +1888,9 @@
             "en": "My mother left a note on the table to remind me.",
             "cn": "我妈妈在桌子上留了张纸条提醒我。"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[nəʊt]",
+        "phonetic_textbook": "/nəʊt/"
       },
       {
         "text": "whom",
@@ -1647,7 +1901,9 @@
             "en": "Whom did you invite to your birthday party last weekend?",
             "cn": "上周末你邀请了谁参加你的生日派对？"
           }
-        ]
+        ],
+        "phonetic_dictionary": "[hu:m]",
+        "phonetic_textbook": "/huːm/"
       }
     ]
   }

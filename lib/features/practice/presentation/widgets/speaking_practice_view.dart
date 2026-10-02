@@ -287,9 +287,12 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
   Future<void> _beginOfflineListening(int token) async {
     if (!await OfflineAsrService.instance.isInstalled()) {
       if (!mounted || token != _sessionToken) return;
-      setState(() => _showOfflineOffer = true);
-      _handleStartListeningFailed('离线识别模型还没下载');
-      return;
+      final ok = await OfflineAsrDownloadDialog.show(context);
+      if (!ok || !mounted || token != _sessionToken) {
+        setState(() => _showOfflineOffer = true);
+        _handleStartListeningFailed('离线识别模型还没下载');
+        return;
+      }
     }
 
     await SpeechService().cancel();
@@ -433,7 +436,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
   }
 
 
-  /// 检测到语音但匹配差时进入失败态，等待用户手动重新开始
+  /// 没对上时弹出重试。点「再读一次」会直接重新听，不再多点一次麦克风。
   void _showRetryPrompt() {
     if (!mounted) return;
 
@@ -455,6 +458,12 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
     _showRetryOverlay();
   }
 
+  Future<void> _retryListening() async {
+    await AudioService().stop();
+    if (!mounted || _state == SpeakingState.success) return;
+    await _beginListening(_sessionToken);
+  }
+
   void _showRetryOverlay() {
     showGeneralDialog(
       context: context,
@@ -471,7 +480,10 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
           variant: widget.isReviewMode
               ? PracticeSuccessVariant.review
               : PracticeSuccessVariant.learning,
-          onRetry: () => Navigator.of(context).pop(),
+          onRetry: () {
+            Navigator.of(context).pop();
+            unawaited(_retryListening());
+          },
         );
       },
     );
@@ -1006,7 +1018,7 @@ class _SpeakingPracticeViewState extends State<SpeakingPracticeView>
             ),
             const SizedBox(height: 8),
             Text(
-              widget.word.phonetic,
+              widget.word.displayPhonetic,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: phoneticFontSize * textScale,
                 fontWeight: FontWeight.w500,

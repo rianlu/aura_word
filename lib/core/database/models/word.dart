@@ -1,19 +1,37 @@
 import 'dart:convert';
+import '../../services/pronunciation_settings.dart';
 
 class Word {
   final String id;
   final String text;
   final String meaning;
   final String phonetic;
+  final String phoneticTextbook;
+  final String phoneticDictionary;
   final String pos;
 
-  /// 优先返回美式音标，找不到则返回原字符串
+  /// 音素评分用的参考音标。优先课本，没有再退回现用音标。
+  String get referencePhonetic {
+    final textbook = phoneticTextbook.trim();
+    if (textbook.isNotEmpty) return textbook;
+    if (phonetic.trim().isNotEmpty) return phonetic.trim();
+    return phoneticDictionary.trim();
+  }
+
+  /// 按设置返回课本音标或词典音标。课本没有音标时回退到词典。
   String get displayPhonetic {
-    if (phonetic.contains('US:')) {
-      final match = RegExp(r'US:\s*(\[[^\]]+\]|[^\]\s]+)').firstMatch(phonetic);
-      return match?.group(1)?.trim() ?? phonetic;
+    final textbook = phoneticTextbook.trim();
+    final dictionary = phoneticDictionary.trim().isNotEmpty
+        ? phoneticDictionary.trim()
+        : phonetic.trim();
+    final chosen = PhoneticSourceSettings.useTextbook
+        ? (textbook.isNotEmpty ? textbook : dictionary)
+        : (dictionary.isNotEmpty ? dictionary : textbook);
+    if (chosen.contains('US:')) {
+      final match = RegExp(r'US:\s*(\[[^\]]+\]|[^\]\s]+)').firstMatch(chosen);
+      return match?.group(1)?.trim() ?? chosen;
     }
-    return phonetic.trim();
+    return chosen.trim();
   }
 
   final int grade;
@@ -31,6 +49,8 @@ class Word {
     required this.text,
     required this.meaning,
     required this.phonetic,
+    this.phoneticTextbook = '',
+    this.phoneticDictionary = '',
     this.pos = '',
     required this.grade,
     required this.semester,
@@ -69,7 +89,11 @@ class Word {
          id: json['id'] as String,
          text: json['text'] as String,
          meaning: json['meaning'] as String,
-         phonetic: json['phonetic'] as String,
+         phonetic: json['phonetic'] as String? ?? '',
+         phoneticTextbook: json['phonetic_textbook'] as String? ?? '',
+         phoneticDictionary: json['phonetic_dictionary'] as String? ??
+             json['phonetic'] as String? ??
+             '',
          pos: json['pos'] as String? ?? '',
          grade: json['grade'] as int,
          semester: json['semester'] as int,
@@ -88,6 +112,8 @@ class Word {
         'text': text,
         'meaning': meaning,
         'phonetic': phonetic,
+        'phonetic_textbook': phoneticTextbook,
+        'phonetic_dictionary': phoneticDictionary,
         'pos': pos,
         'grade': grade,
         'semester': semester,

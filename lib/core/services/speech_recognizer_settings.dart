@@ -15,6 +15,11 @@ class SpeechRecognizerSettings {
 
   Future<SpeechRecognizerMode> getMode() async {
     final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('pronunciation_engine') == 'phoneme') {
+      await prefs.setString('pronunciation_engine', 'text');
+      await prefs.setString(_key, SpeechRecognizerMode.offline.name);
+      return SpeechRecognizerMode.offline;
+    }
     return _fromName(prefs.getString(_key));
   }
 

@@ -223,6 +223,7 @@ class PracticeRetryOverlay extends StatelessWidget {
   final List<PhonemeMark> phonemes;
   final PracticeSuccessVariant variant;
   final VoidCallback onRetry;
+  final VoidCallback? onUpgrade;
 
   const PracticeRetryOverlay({
     super.key,
@@ -230,6 +231,7 @@ class PracticeRetryOverlay extends StatelessWidget {
     required this.heard,
     required this.hint,
     required this.onRetry,
+    this.onUpgrade,
     this.phonemes = const [],
     this.variant = PracticeSuccessVariant.learning,
   });
@@ -286,11 +288,11 @@ class PracticeRetryOverlay extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  if (nearMiss) ...[
+                  if (phonemes.isNotEmpty) ...[
                     PhonemeStrip(phonemes: phonemes),
                     const SizedBox(height: 8),
                     Text(
-                      hint,
+                      nearMiss && hint.isNotEmpty ? hint : '这几个音没对上',
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
@@ -338,6 +340,25 @@ class PracticeRetryOverlay extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (onUpgrade != null) ...[
+                    const SizedBox(height: 4),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextButton(
+                        onPressed: onUpgrade,
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColors.textMediumEmphasis,
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                        ),
+                        child: Text(
+                          '改用音素评分',
+                          style: GoogleFonts.plusJakartaSans(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -65,6 +65,8 @@ class WordDao {
         text: word.text,
         meaning: word.meaning,
         phonetic: word.phonetic,
+        phoneticTextbook: word.phoneticTextbook,
+        phoneticDictionary: word.phoneticDictionary,
         pos: word.pos,
         grade: word.grade,
         semester: word.semester,

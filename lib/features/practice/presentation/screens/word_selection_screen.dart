@@ -211,7 +211,7 @@ class _WordSelectionScreenState extends State<WordSelectionScreen> {
           const SizedBox(height: 8),
           Text(_currentWord!.meaning, style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.textHighEmphasis)),
           const SizedBox(height: 8),
-          Text(_currentWord!.phonetic, style: const TextStyle(fontSize: 18, color: AppColors.textMediumEmphasis, fontWeight: FontWeight.w500)),
+          Text(_currentWord!.displayPhonetic, style: const TextStyle(fontSize: 18, color: AppColors.textMediumEmphasis, fontWeight: FontWeight.w500)),
           const SizedBox(height: 24),
 
           // 细节处理

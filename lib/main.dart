@@ -12,11 +12,17 @@ import 'features/practice/presentation/screens/spelling_practice_screen.dart';
 import 'features/statistics/presentation/screens/statistics_screen.dart';
 
 import 'core/database/database_helper.dart';
+import 'core/services/pronunciation_settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHelper().database;
   final prefs = await SharedPreferences.getInstance();
+  await PhoneticSourceSettings.instance.load();
+  if ((prefs.getInt('phonetic_data_version') ?? 0) < 3) {
+    await DatabaseHelper().updateLibraryFromAssets();
+    await prefs.setInt('phonetic_data_version', 3);
+  }
   final hasSeenSplash = prefs.getBool('seen_splash') ?? false;
   runApp(MyApp(showSplash: !hasSeenSplash));
 }

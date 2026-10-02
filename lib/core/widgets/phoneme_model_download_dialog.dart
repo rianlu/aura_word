@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../services/offline_asr_service.dart';
+import '../services/phoneme_scorer_service.dart';
 import '../theme/app_colors.dart';
 
-class OfflineAsrDownloadDialog extends StatefulWidget {
-  const OfflineAsrDownloadDialog({super.key});
+class PhonemeModelDownloadDialog extends StatefulWidget {
+  const PhonemeModelDownloadDialog({super.key});
 
   static Future<bool> show(BuildContext context) {
     return showDialog<bool>(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const OfflineAsrDownloadDialog(),
+      builder: (context) => const PhonemeModelDownloadDialog(),
     ).then((value) => value ?? false);
   }
 
   @override
-  State<OfflineAsrDownloadDialog> createState() => _OfflineAsrDownloadDialogState();
+  State<PhonemeModelDownloadDialog> createState() => _PhonemeModelDownloadDialogState();
 }
 
-class _OfflineAsrDownloadDialogState extends State<OfflineAsrDownloadDialog> {
+class _PhonemeModelDownloadDialogState extends State<PhonemeModelDownloadDialog> {
   double _progress = 0;
   String? _error;
   bool _running = true;
@@ -37,7 +37,7 @@ class _OfflineAsrDownloadDialogState extends State<OfflineAsrDownloadDialog> {
       _progress = 0;
     });
     try {
-      await OfflineAsrService.instance.download(
+      await PhonemeScorerService.instance.download(
         onProgress: (value) {
           if (!mounted) return;
           setState(() => _progress = value.clamp(0, 1));
@@ -73,7 +73,7 @@ class _OfflineAsrDownloadDialogState extends State<OfflineAsrDownloadDialog> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '下载离线识别',
+                '下载音素评分',
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
@@ -82,10 +82,11 @@ class _OfflineAsrDownloadDialogState extends State<OfflineAsrDownloadDialog> {
               ),
               const SizedBox(height: 8),
               Text(
-                '约 140MB，下载后用英语模型听写，不依赖系统语音引擎',
+                '约 320MB。下载后按课本音标听你的录音，不再只看听写文字',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 13,
+                  height: 1.4,
                   color: AppColors.textMediumEmphasis,
                 ),
               ),

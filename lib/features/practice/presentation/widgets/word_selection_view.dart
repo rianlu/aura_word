@@ -421,7 +421,7 @@ class _WordSelectionViewState extends State<WordSelectionView> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.word.phonetic,
+                      widget.word.displayPhonetic,
                       style: TextStyle(
                         fontSize: phoneticFontSize * scale,
                         color: AppColors.textMediumEmphasis,
